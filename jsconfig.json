@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "ESNext",
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": "./src",
+        "paths": {
+            "@/*": ["*"],
+        },
+        "checkJs": true
+    },
+    "typeAcquisition": {
+        "enable": true
+    },
+    "exclude": ["node_modules", "dist"]
+}
