@@ -1,10 +1,11 @@
-/** @jest-environment jsdom */
+import NodeBst from './index.js';
 
-import capitalize from "./index.js";
-
-describe('capitalize', () => {
-  it('takes a string and capitalize 1st letter', () => {
-    expect(capitalize).toBeDefined();
+describe('Node class', () => {
+  it('exists', () => {
+    expect(NodeBst).toBeDefined();
   });
+  it('is a class'), () => {
+    const node1 = new NodeBst();
+    expect(node1).toBeInstanceOf(NodeBst)
+  };
 });
-
