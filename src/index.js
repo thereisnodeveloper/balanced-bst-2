@@ -21,10 +21,22 @@ export class Tree {
    * @param {Array} array
    * @returns
    */
-  buildTree(array) {
+  buildTreeWrapper(array) {
     const processedArray = [...new Set(array)].toSorted((a, b) => a - b);
-    
 
-    return Math.ceil(processedArray.length / 2);
+    function buildTreeRecursive() {
+    // get middle
+      const middle = Math.ceil(processedArray.length / 2);
+    // take left subarray, construct left subtree (recurse)
+      const left = processedArray.slice(0, middle - 1);
+
+    // take right subarray, construct right subtree (recurse)
+      const right = processedArray.slice(middle);
+
+    // base case: no number is left in the array, all added to tree
+      return left;
+    }
+
+    return buildTreeRecursive(processedArray);
   }
 }
