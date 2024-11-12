@@ -4,10 +4,16 @@ describe('Tree class', () => {
   const tree1 = new Tree();
 
   describe('buildTree', () => {
-    it('removes duplicates',()=>{
-      expect(tree1.buildTree([5,5,2,4])).toStrictEqual([2,4,5]);
-      expect(tree1.buildTree([4,4,5,5,2,4])).toStrictEqual([2,4,5])
-    })
+    it('returns root', () => {
+      expect(tree1.buildTree([1, 2, 3, 4, 5])).toBe(3);
+      expect(tree1.buildTree([1, 2, 3, 4])).toBe(2);
+      expect(tree1.buildTree([3, 4, 5, 6])).toBe(2);
+    });
+
+    // it('removes duplicates',()=>{
+    //   expect(tree1.buildTree([5,5,2,4])).toStrictEqual([2,4,5]);
+    //   expect(tree1.buildTree([4,4,5,5,2,4])).toStrictEqual([2,4,5])
+    // })
     // it('sorts fed array', () => {
     //   expect(tree1.buildTree([1, 3, 4, 5, 2])).toStrictEqual([1, 2, 3, 4, 5]);
     //   expect(tree1.buildTree([5, 770, 100])).toStrictEqual([5, 100, 770]);

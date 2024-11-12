@@ -12,8 +12,8 @@ export class NodeBst {
 }
 
 export class Tree {
-  constructor(root) {
-    this.root = root;
+  constructor() {
+    this.root = null;
   }
 
   /**
@@ -22,8 +22,9 @@ export class Tree {
    * @returns
    */
   buildTree(array) {
+    const processedArray = [...new Set(array)].toSorted((a, b) => a - b);
     
-    const result = [...new Set(array)].toSorted((a, b) => a - b);
-    return result
+
+    return Math.ceil(processedArray.length / 2);
   }
 }
