@@ -40,7 +40,7 @@ export class Tree {
 
       root.left = buildTreeRecursive(array.slice(0, middle - 1), 'left', recursionNumber + 1);
       root.right = buildTreeRecursive(
-        array.slice(array.slice(middle)),
+        array.slice(middle, -1),
         'right',
         recursionNumber + 1,
       );
