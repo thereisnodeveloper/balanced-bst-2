@@ -31,13 +31,21 @@ export class Tree {
       console.log('recursionNumber:', recursionNumber);
 
       console.log(array);
-      if (array.length === 0) return null;
+
+      if (array.length === 0) {
+        console.log('reached end (array.length = 0), stopping')
+        return null};
       // get middle, assign to root
-      const middle = (array.length - 1) / 2;
-      const root = new NodeBst(middle);
+      const middle = Math.floor( (array.length - 1) / 2);
+      const root = new NodeBst(array[middle]);
       // take left subarray, construct left subtree (recurse)
       console.log('middle:', middle);
 
+      const leftSubArray = array.slice(0, middle - 1)
+      console.log('leftSubArray:', leftSubArray)
+      const rightSubArray = array.slice(middle, -1)
+        console.log('rightSubArray:', rightSubArray)
+      
       root.left = buildTreeRecursive(array.slice(0, middle - 1), 'left', recursionNumber + 1);
       root.right = buildTreeRecursive(
         array.slice(middle, -1),
@@ -74,3 +82,4 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 const tree1 = new Tree();
 prettyPrint(tree1.root);
 tree1.buildTree([1, 2, 3, 4, 5]);
+console.log('tree1.root:', tree1.root)
