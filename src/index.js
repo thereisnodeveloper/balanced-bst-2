@@ -43,13 +43,11 @@ export class Tree {
       console.log('middle:', middle);
 
       const leftSubArray = array.slice(0, middle)
-      console.log('leftSubArray:', leftSubArray)
       const rightSubArray = array.slice(middle + 1, end +1)
-        console.log('rightSubArray:', rightSubArray)
       
-      root.left = buildTreeRecursive(array.slice(0, middle), 'left', recursionNumber + 1);
+      root.left = buildTreeRecursive(leftSubArray, 'left', recursionNumber+1);
       root.right = buildTreeRecursive(
-        array.slice(middle + 1, end +1),
+        rightSubArray,
         'right',
         recursionNumber + 1,
       );
