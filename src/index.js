@@ -18,7 +18,7 @@ export class Tree {
 
   /**
    *
-   * @param {Array} array
+   * @param {Array} startingArray
    * @returns
    */
   buildTree(startingArray) {
@@ -77,7 +77,7 @@ export class Tree {
       if (node.right) {
         nodeItem.right = node.right.data;
       }
-      outputArray.push(nodeItem)
+      outputArray.push(nodeItem);
     });
     return outputArray;
   }
@@ -117,9 +117,25 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 };
 const tree1 = new Tree();
 // const treeArray = [1, 2, 3, 4];
-const treeArray = [1, 2, 3, 4, 5];
+const treeArray = [1, 2, 3, 4];
 tree1.buildTree(treeArray);
 prettyPrint(tree1.root);
 console.log('tree1.root:', tree1.root);
 // console.log( tree1.showTreeAsArray())
 console.table(tree1.showTreeAsArray());
+// const filtered = tree1.showTreeAsArray().filter((nodeItemObj) => {
+//   return nodeItemObj.left !== null || nodeItemObj.right !== null;
+// });
+// console.log('filtered:', filtered);
+
+
+
+// .forEach((nodeItemObj)=>{
+//   nodeItemObj.
+// })
+
+//OPT1:check if array length changes if turned into a set
+//OPT2: build a separate comparison array, iterate through it for every item of
+//the original array
+//OPT3: forEach, some - nest loop, bad O(n)
+//DECISION: go with OPT1; cant find alternatives no internet

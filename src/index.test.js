@@ -3,10 +3,31 @@ import { NodeBst, Tree } from './index.js';
 describe('Tree class', () => {
   const tree1 = new Tree();
 
+  tree1.buildTree([1, 2, 3, 4]);
+  describe('should not have node.left or node.right value occur more than once', () => {
+
+    // nothing on the 'left' column can be on the 'right' column, vice versa
+    // besides NULL, there should not be duplicate values in LEFT column
+    // besides NULL, there should not be duplicate values in RIGHT column
+    const arrayOfLeftRightReferences = [];
+    tree1.showTreeAsArray().forEach((nodeItemObject) => {
+      ['left', 'right'].forEach((property) => {
+        if (nodeItemObject[property] !== null) arrayOfLeftRightReferences.push(nodeItemObject[property]);
+      });
+    });
+  
+    expect(arrayOfLeftRightReferences.length).toBe(new Set(arrayOfLeftRightReferences).size)
+  });
+
   describe('print tree as array', () => {
     tree1.buildTree([1, 2, 3, 4]);
 
-    expect(tree1.showTreeAsArray()).toStrictEqual([null,1,null,1,2,3,null,3,4,null,4,null]);
+    expect(tree1.showTreeAsArray()).toStrictEqual([
+      { left: null, data: 1, right: null },
+      { left: 1, data: 2, right: 3 },
+      { left: null, data: 3, right: 4 },
+      { left: null, data: 4, right: null },
+    ]);
   });
 
   describe('buildTree', () => {
