@@ -3,8 +3,25 @@ import { NodeBst, Tree } from './index.js';
 describe('Tree class', () => {
   const tree1 = new Tree();
 
-  tree1.buildTree([1, 2, 3, 4]);
+  describe('insertion', () => {
+    it('exists', () => {
+      expect(tree1.insert).toBeDefined();
+    });
+    it('inserts 1 node, changing showTreeAsArray', () => {
+      tree1.buildTree([1, 2, 3, 4]);
+      tree1.insert(5);
+      const testAnswer = [
+        { left: null, data: 1, right: null },
+        { left: 1, data: 2, right: 3 },
+        { left: null, data: 3, right: 4 },
+        { left: null, data: 4, right: 5 },
+        { left: null, data: 5, right: null },
+      ];
+      expect(tree1.showTreeAsArray()).toStrictEqual(testAnswer)
+    });
+  });
   describe('showTreeAsArray', () => {
+    tree1.buildTree([1, 2, 3, 4]);
     it('should not have node.left or node.right value occur more than once', () => {
       // nothing on the 'left' column can be on the 'right' column, vice versa
       // besides NULL, there should not be duplicate values in LEFT column
@@ -15,7 +32,7 @@ describe('Tree class', () => {
           if (nodeItemObject[property] !== null)
             arrayOfLeftRightReferences.push(nodeItemObject[property]);
         });
-      })
+      });
 
       expect(arrayOfLeftRightReferences.length).toBe(new Set(arrayOfLeftRightReferences).size);
     });
