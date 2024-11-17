@@ -3,6 +3,12 @@ import { NodeBst, Tree } from './index.js';
 describe('Tree class', () => {
   const tree1 = new Tree();
 
+  describe('print tree as array', () => {
+    tree1.buildTree([1, 2, 3, 4]);
+
+    expect(tree1.showTreeAsArray()).toStrictEqual([null,1,null,1,2,3,null,3,4,null,4,null]);
+  });
+
   describe('buildTree', () => {
     // TODO: height of left subtree and rightsubtree differ by at most 1
     // TODO: check that tree is balanced

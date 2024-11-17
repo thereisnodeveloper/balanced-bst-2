@@ -25,7 +25,9 @@ export class Tree {
     const processedArray = [...new Set(startingArray)].toSorted((a, b) => a - b);
 
     function buildTreeRecursive(array, whichSubTree, recursionNumber = 0) {
-      if (recursionNumber > 30) { throw new Error('recursion callstack max exceeded'); }
+      if (recursionNumber > 30) {
+        throw new Error('recursion callstack max exceeded');
+      }
       // Tracing recursion
       // console.log('whichSubTree', whichSubTree);
       // console.log('recursionNumber:', recursionNumber);
@@ -33,23 +35,20 @@ export class Tree {
 
       if (array.length === 0) {
         // console.log('reached end (array.length = 0), stopping')
-        return null};
+        return null;
+      }
       // get middle, assign to root
-      const middle = Math.floor( (array.length - 1) / 2);
-      const end = array.length -1
+      const middle = Math.floor((array.length - 1) / 2);
+      const end = array.length - 1;
       const root = new NodeBst(array[middle]);
       // take left subarray, construct left subtree (recurse)
       // console.log('middle:', middle);
 
-      const leftSubArray = array.slice(0, middle)
-      const rightSubArray = array.slice(middle + 1, end +1)
-      
-      root.left = buildTreeRecursive(leftSubArray, 'left', recursionNumber+1);
-      root.right = buildTreeRecursive(
-        rightSubArray,
-        'right',
-        recursionNumber + 1,
-      );
+      const leftSubArray = array.slice(0, middle);
+      const rightSubArray = array.slice(middle + 1, end + 1);
+
+      root.left = buildTreeRecursive(leftSubArray, 'left', recursionNumber + 1);
+      root.right = buildTreeRecursive(rightSubArray, 'right', recursionNumber + 1);
 
       // take right subarray, construct right subtree (recurse)
 
@@ -58,11 +57,45 @@ export class Tree {
     }
     this.root = buildTreeRecursive(processedArray);
   }
-}
 
-// traceRecursion(){
-//   const recursionCount
-// }
+  insert(value) {
+    // create new node with value
+    // travel down the tree
+    // compare values to determine whether to go left or right
+    // check if next node is leafnode
+    // change reference to currentNode to the new node
+  }
+
+  showTreeAsArray() {
+    const outputArray = [];
+    this.inOrder((node) => {
+      outputArray.push(node);
+      // outputArray.push(node.left);
+      // outputArray.push(node.data);
+      // outputArray.push(node.right);
+    });
+    return outputArray;
+  }
+
+  inOrder(callback, node = this.root) {
+    // callback(node);
+    // inOrder: LEFT, DATA, RIGHT
+    // LIFO stack
+
+    // visit left
+    if (node.left) {
+      this.inOrder(callback, node.left);
+    }
+    // visit node(data)
+    // console.log(node.data);
+    callback(node);
+    // visit right
+    if (node.right) {
+      this.inOrder(callback, node.right);
+    }
+    return null;
+  }
+}
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node === null) {
@@ -77,10 +110,11 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
     prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
   }
 };
-const tree1 = new Tree()
-const treeArray = [1, 2, 3, 4, 5, 6, 7]
-// tree1.buildTree([1, 2, 3, 4, 5]);
-tree1.buildTree(treeArray)
-prettyPrint(tree1.root)
-console.log('tree1.root:', tree1.root)
-
+const tree1 = new Tree();
+// const treeArray = [1, 2, 3, 4];
+const treeArray = [1, 2, 3, 4, 5];
+tree1.buildTree(treeArray);
+prettyPrint(tree1.root);
+console.log('tree1.root:', tree1.root);
+// console.log( tree1.showTreeAsArray())
+console.log( tree1.showTreeAsArray())
