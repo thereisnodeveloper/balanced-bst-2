@@ -27,20 +27,19 @@ export class Tree {
     function buildTreeRecursive(array, whichSubTree, recursionNumber = 0) {
       if (recursionNumber > 30) { throw new Error('recursion callstack max exceeded'); }
       // Tracing recursion
-      console.log('whichSubTree', whichSubTree);
-      console.log('recursionNumber:', recursionNumber);
-
-      console.log('startarray:',array);
+      // console.log('whichSubTree', whichSubTree);
+      // console.log('recursionNumber:', recursionNumber);
+      // console.log('startarray:',array);
 
       if (array.length === 0) {
-        console.log('reached end (array.length = 0), stopping')
+        // console.log('reached end (array.length = 0), stopping')
         return null};
       // get middle, assign to root
       const middle = Math.floor( (array.length - 1) / 2);
       const end = array.length -1
       const root = new NodeBst(array[middle]);
       // take left subarray, construct left subtree (recurse)
-      console.log('middle:', middle);
+      // console.log('middle:', middle);
 
       const leftSubArray = array.slice(0, middle)
       const rightSubArray = array.slice(middle + 1, end +1)
@@ -79,6 +78,9 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 };
 const tree1 = new Tree()
-tree1.buildTree([1, 2, 3, 4, 5]);
+const treeArray = [1, 2, 3, 4, 5, 6, 7]
+// tree1.buildTree([1, 2, 3, 4, 5]);
+tree1.buildTree(treeArray)
 prettyPrint(tree1.root)
 console.log('tree1.root:', tree1.root)
+
