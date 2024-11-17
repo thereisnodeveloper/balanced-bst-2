@@ -69,10 +69,15 @@ export class Tree {
   showTreeAsArray() {
     const outputArray = [];
     this.inOrder((node) => {
-      outputArray.push(node);
-      // outputArray.push(node.left);
-      // outputArray.push(node.data);
-      // outputArray.push(node.right);
+      const nodeItem = { left: null, data: null, right: null };
+      if (node.left) {
+        nodeItem.left = node.left.data;
+      }
+      nodeItem.data = node.data;
+      if (node.right) {
+        nodeItem.right = node.right.data;
+      }
+      outputArray.push(nodeItem)
     });
     return outputArray;
   }
@@ -117,4 +122,4 @@ tree1.buildTree(treeArray);
 prettyPrint(tree1.root);
 console.log('tree1.root:', tree1.root);
 // console.log( tree1.showTreeAsArray())
-console.log( tree1.showTreeAsArray())
+console.table(tree1.showTreeAsArray());
