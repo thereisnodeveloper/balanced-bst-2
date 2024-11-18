@@ -8,6 +8,10 @@ describe('Tree class', () => {
     it('exists', () => {
       expect(tree1.insert).toBeDefined();
     });
+    it('throws error when node value exists in tree',()=>{
+      tree1.buildTree([1, 2, 3, 4]);
+      expect( ()=> tree1.insert(4)).toThrow()
+    })
     it('inserts 1 node, changing showTreeAsArray', () => {
       tree1.buildTree([1, 2, 3, 4]);
       tree1.insert(5);
