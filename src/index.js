@@ -58,11 +58,30 @@ export class Tree {
     this.root = buildTreeRecursive(processedArray);
   }
 
-  insert(value) {
-    // create new node with value
+  insert(value, node = this.root) {
+    const TRAVEL_DIR_ENUMS = { LEFT: 'left', RIGHT: 'right' };
     // travel down the tree
+    const travelDirection = compareValues(value, node.data);
+    function compareValues(value, currentNodeData) {
+      if (value === currentNodeData) throw new Error('shouldnt have duplicate values');
+      if (value < currentNodeData) {
+        return TRAVEL_DIR_ENUMS.LEFT;
+      }
+      return TRAVEL_DIR_ENUMS.RIGHT;
+    }
+
+    // recursive case
+    if (node[travelDirection]) {
+      this.insert(value, node[travelDirection]);
+    } else {
+      // base case - no child node to get in the way
+      node[travelDirection] = new NodeBst(value);
+    }
     // compare values to determine whether to go left or right
-    // check if next node is leafnode
+    // check if either node.left or node.right exists already
+    // if exists, continue - recurse
+    // if not, base case.
+    // create new node with value
     // change reference to currentNode to the new node
   }
 
@@ -120,6 +139,7 @@ const tree1 = new Tree();
 const treeArray = [1, 2, 3, 4];
 tree1.buildTree(treeArray);
 prettyPrint(tree1.root);
+tree1.insert(5)
 console.log('tree1.root:', tree1.root);
 // console.log( tree1.showTreeAsArray())
 console.table(tree1.showTreeAsArray());
@@ -128,14 +148,12 @@ console.table(tree1.showTreeAsArray());
 // });
 // console.log('filtered:', filtered);
 
-
-
 // .forEach((nodeItemObj)=>{
 //   nodeItemObj.
 // })
 
-//OPT1:check if array length changes if turned into a set
-//OPT2: build a separate comparison array, iterate through it for every item of
-//the original array
-//OPT3: forEach, some - nest loop, bad O(n)
-//DECISION: go with OPT1; cant find alternatives no internet
+// OPT1:check if array length changes if turned into a set
+// OPT2: build a separate comparison array, iterate through it for every item of
+// the original array
+// OPT3: forEach, some - nest loop, bad O(n)
+// DECISION: go with OPT1; cant find alternatives no internet
