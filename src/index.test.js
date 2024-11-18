@@ -2,6 +2,7 @@ import { NodeBst, Tree } from './index.js';
 
 describe('Tree class', () => {
   const tree1 = new Tree();
+  let testAnswer;
 
   describe('insertion', () => {
     it('exists', () => {
@@ -10,15 +11,27 @@ describe('Tree class', () => {
     it('inserts 1 node, changing showTreeAsArray', () => {
       tree1.buildTree([1, 2, 3, 4]);
       tree1.insert(5);
-      const testAnswer = [
+      testAnswer = [
         { left: null, data: 1, right: null },
         { left: 1, data: 2, right: 3 },
         { left: null, data: 3, right: 4 },
         { left: null, data: 4, right: 5 },
         { left: null, data: 5, right: null },
       ];
-      expect(tree1.showTreeAsArray()).toStrictEqual(testAnswer)
+      expect(tree1.showTreeAsArray()).toStrictEqual(testAnswer);
     });
+    it('inserts a node with value between lowest and highest value, changing showTreeAsArray', () => {
+      tree1.buildTree([1, 2, 3, 10]);
+      tree1.insert(4);
+      testAnswer = [
+        { left: null, data: 1, right: null },
+        { left: 1, data: 2, right: 3 },
+        { left: null, data: 3, right: 10 },
+        { left: null, data: 4, right: null },
+        { left: 4, data: 10, right: null },
+      ];
+      expect(tree1.showTreeAsArray()).toStrictEqual(testAnswer)
+    })
   });
   describe('showTreeAsArray', () => {
     tree1.buildTree([1, 2, 3, 4]);

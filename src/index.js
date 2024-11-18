@@ -136,10 +136,10 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 };
 const tree1 = new Tree();
 // const treeArray = [1, 2, 3, 4];
-const treeArray = [1, 2, 3, 4];
+const treeArray = [1, 2, 3, 10];
 tree1.buildTree(treeArray);
+tree1.insert(4)
 prettyPrint(tree1.root);
-tree1.insert(5)
 console.log('tree1.root:', tree1.root);
 // console.log( tree1.showTreeAsArray())
 console.table(tree1.showTreeAsArray());
