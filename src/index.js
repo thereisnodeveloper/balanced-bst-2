@@ -133,14 +133,33 @@ export class Tree {
     // if value === node, match has been found
     // ['left','right']
     if (!node) return;
-    let deleteTarget;
-    ['left', 'right'].forEach((direction) => {
-      if (node[direction] && value === node[direction].data) {
-        node[direction] = null;
-        return node[direction];
+    const performDeletion = (direction) => {
+      const deleteTarget = node[direction];
+      // deletion target has 2 children
+      if (deleteTarget.left && deleteTarget.right) {
+        throw new Error('has 2 children');
       }
-      this.delete(value, node[direction]);
-    });
+      // deletion target is leafnode, has NO children
+      if (!deleteTarget.left && !deleteTarget.right) {
+        node[direction] = null;
+      }
+      // deletion target has 2 children
+      if (deleteTarget.left || deleteTarget.right) {
+        //assign target's parent's references to a grandchild
+        node[direction] = deleteTarget.left ? deleteTarget.left : deleteTarget.right;
+      }
+    };
+
+    const findMatch = () => {
+      ['left', 'right'].forEach((direction) => {
+        if (node[direction] && value === node[direction].data) {
+          performDeletion(direction);
+          return node[direction];
+        }
+        this.delete(value, node[direction]);
+      });
+    };
+    findMatch();
 
     // TODO: delete target has children
 
@@ -171,6 +190,7 @@ const tree1 = new Tree();
 const treeArray = [1, 2, 3, 4];
 tree1.buildTree(treeArray);
 // tree1.insert(4)
+tree1.delete(3)
 prettyPrint(tree1.root);
 console.log('tree1.root:', tree1.root);
 // console.log( tree1.showTreeAsArray())

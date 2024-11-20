@@ -16,9 +16,9 @@ describe('Tree class', () => {
       tree1.buildTree([1, 2, 3, 4]);
       tree1.delete(3);
       expect(tree1.showTreeAsArray()).toStrictEqual([
-        { left: null, data: 1, right: 2 },
+        { left: null, data: 1, right: null },
         { left: 1, data: 2, right: 4 },
-        { left: 2, data: 4, right: null },
+        { left: null, data: 4, right: null },
       ]);
     });
 
