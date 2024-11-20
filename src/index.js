@@ -59,17 +59,25 @@ export class Tree {
     this.root = buildTreeRecursive(processedArray);
   }
 
+  compareValues = (value, currentNodeData) => {
+    if (value === currentNodeData) throw new Error('shouldnt have duplicate values');
+    if (value < currentNodeData) {
+      return this.TRAVEL_DIRECTION_ENUMS.LEFT;
+    }
+    return this.TRAVEL_DIRECTION_ENUMS.RIGHT;
+  };
+
   insert(value, node = this.root) {
     // travel down the tree
-    const compareValues = (value, currentNodeData) => {
-      if (value === currentNodeData) throw new Error('shouldnt have duplicate values');
-      if (value < currentNodeData) {
-        return this.TRAVEL_DIRECTION_ENUMS.LEFT;
-      }
-      return this.TRAVEL_DIRECTION_ENUMS.RIGHT;
-    };
-    const travelDirection = compareValues(value, node.data);
-    
+    // const compareValues = (value, currentNodeData) => {
+    //   if (value === currentNodeData) throw new Error('shouldnt have duplicate values');
+    //   if (value < currentNodeData) {
+    //     return this.TRAVEL_DIRECTION_ENUMS.LEFT;
+    //   }
+    //   return this.TRAVEL_DIRECTION_ENUMS.RIGHT;
+    // };
+    const travelDirection = this.compareValues(value, node.data);
+
     // recursive case
     if (node[travelDirection]) {
       this.insert(value, node[travelDirection]);
@@ -120,17 +128,36 @@ export class Tree {
     return null;
   }
 
-  delete(value) {
+  delete(value, node = this.root) {
     let deleteTarget;
-    //TODO:
-    //if value doesn't exist, return undefined
-    //travel
-    //if value < node, set direction to left
-    //if value > node, set direction to right
-    //if value === node, match has been found
+    // TODO: check node's children
+    // if value === node, match has been found
+    // ['left','right']
+    if (!node) return;
+    if (node.left && value === node.left.data) {
+      // delete left node
+      node.left = null;
+      return node.left;
+    } else {
+      this.delete(value, node.left);
+    }
+    if (node.right && value === node.right.data) {
+      // delete right node
+      node.right = null;
+      return node.right;
+    } else {
+      this.delete(value, node.right);
+    }
 
-    //return deleted Node
-    return deleteTarget;
+    // TODO: delete target has children
+    // TODO: leaf node
+
+    // travel
+    // if value < node, set direction to left
+    // if value > node, set direction to right
+    const travelDirection = this.compareValues(value, node.data);
+    // if match not found && reached end:
+    // value doesn't exist, return undefined
   }
 }
 
