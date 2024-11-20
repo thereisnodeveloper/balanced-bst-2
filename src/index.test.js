@@ -12,6 +12,15 @@ describe('Tree class', () => {
       tree1.delete(5);
       expect(tree1.delete(5)).toBeUndefined();
     });
+    it('deletes node with 1 child', () => {
+      tree1.buildTree([1, 2, 3, 4]);
+      tree1.delete(3);
+      expect(tree1.showTreeAsArray()).toStrictEqual([
+        { left: null, data: 1, right: 2 },
+        { left: 1, data: 2, right: 4 },
+        { left: 2, data: 4, right: null },
+      ]);
+    });
 
     it('deletes leaf node', () => {
       tree1.buildTree([1, 2, 3, 4]);

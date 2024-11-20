@@ -143,7 +143,6 @@ export class Tree {
     });
 
     // TODO: delete target has children
-    // TODO: leaf node
 
     // travel
     // if value < node, set direction to left
