@@ -14,6 +14,7 @@ export class NodeBst {
 export class Tree {
   constructor() {
     this.root = null;
+    this.TRAVEL_DIRECTION_ENUMS = { LEFT: 'left', RIGHT: 'right' };
   }
 
   /**
@@ -59,17 +60,16 @@ export class Tree {
   }
 
   insert(value, node = this.root) {
-    const TRAVEL_DIR_ENUMS = { LEFT: 'left', RIGHT: 'right' };
     // travel down the tree
-    const travelDirection = compareValues(value, node.data);
-    function compareValues(value, currentNodeData) {
+    const compareValues = (value, currentNodeData) => {
       if (value === currentNodeData) throw new Error('shouldnt have duplicate values');
       if (value < currentNodeData) {
-        return TRAVEL_DIR_ENUMS.LEFT;
+        return this.TRAVEL_DIRECTION_ENUMS.LEFT;
       }
-      return TRAVEL_DIR_ENUMS.RIGHT;
-    }
-
+      return this.TRAVEL_DIRECTION_ENUMS.RIGHT;
+    };
+    const travelDirection = compareValues(value, node.data);
+    
     // recursive case
     if (node[travelDirection]) {
       this.insert(value, node[travelDirection]);
@@ -119,6 +119,19 @@ export class Tree {
     }
     return null;
   }
+
+  delete(value) {
+    let deleteTarget;
+    //TODO:
+    //if value doesn't exist, return undefined
+    //travel
+    //if value < node, set direction to left
+    //if value > node, set direction to right
+    //if value === node, match has been found
+
+    //return deleted Node
+    return deleteTarget;
+  }
 }
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
@@ -136,9 +149,9 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 };
 const tree1 = new Tree();
 // const treeArray = [1, 2, 3, 4];
-const treeArray = [1, 2, 3, 10];
+const treeArray = [1, 2, 3, 4];
 tree1.buildTree(treeArray);
-tree1.insert(4)
+// tree1.insert(4)
 prettyPrint(tree1.root);
 console.log('tree1.root:', tree1.root);
 // console.log( tree1.showTreeAsArray())

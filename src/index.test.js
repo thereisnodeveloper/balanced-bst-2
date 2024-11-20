@@ -3,15 +3,35 @@ import { NodeBst, Tree } from './index.js';
 describe('Tree class', () => {
   const tree1 = new Tree();
   let testAnswer;
+  describe('deletion', () => {
+    it('exists', () => {
+      expect(tree1.delete).toBeDefined();
+    });
+    it('returns undefined if value doesnt exist', () => {
+      tree1.buildTree([1, 2, 3, 4]);
+      tree1.delete(5);
+      expect(tree1.delete(5)).toBeUndefined();
+    });
+
+    it('deletes leaf node', () => {
+      tree1.buildTree([1, 2, 3, 4]);
+      tree1.delete(1);
+      expect(tree1.showTreeAsArray()).toStrictEqual([
+        { left: null, data: 2, right: 3 },
+        { left: null, data: 3, right: 4 },
+        { left: null, data: 4, right: null },
+      ]);
+    });
+  });
 
   describe('insertion', () => {
     it('exists', () => {
       expect(tree1.insert).toBeDefined();
     });
-    it('throws error when node value exists in tree',()=>{
+    it('throws error when node value exists in tree', () => {
       tree1.buildTree([1, 2, 3, 4]);
-      expect( ()=> tree1.insert(4)).toThrow()
-    })
+      expect(() => tree1.insert(4)).toThrow();
+    });
     it('inserts 1 node, changing showTreeAsArray', () => {
       tree1.buildTree([1, 2, 3, 4]);
       tree1.insert(5);
@@ -34,8 +54,8 @@ describe('Tree class', () => {
         { left: null, data: 4, right: null },
         { left: 4, data: 10, right: null },
       ];
-      expect(tree1.showTreeAsArray()).toStrictEqual(testAnswer)
-    })
+      expect(tree1.showTreeAsArray()).toStrictEqual(testAnswer);
+    });
   });
   describe('showTreeAsArray', () => {
     tree1.buildTree([1, 2, 3, 4]);
