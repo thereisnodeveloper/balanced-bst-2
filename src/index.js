@@ -129,25 +129,18 @@ export class Tree {
   }
 
   delete(value, node = this.root) {
-    let deleteTarget;
     // TODO: check node's children
     // if value === node, match has been found
     // ['left','right']
     if (!node) return;
-    if (node.left && value === node.left.data) {
-      // delete left node
-      node.left = null;
-      return node.left;
-    } else {
-      this.delete(value, node.left);
-    }
-    if (node.right && value === node.right.data) {
-      // delete right node
-      node.right = null;
-      return node.right;
-    } else {
-      this.delete(value, node.right);
-    }
+    let deleteTarget;
+    ['left', 'right'].forEach((direction) => {
+      if (node[direction] && value === node[direction].data) {
+        node[direction] = null;
+        return node[direction];
+      }
+      this.delete(value, node[direction]);
+    });
 
     // TODO: delete target has children
     // TODO: leaf node
