@@ -12,6 +12,43 @@ describe('Tree class', () => {
       tree1.delete(5);
       expect(tree1.delete(5)).toBeUndefined();
     });
+
+    describe('deletion: 2 children', () => {
+      it('finds inOrderSuccessor if node has 2 children', () => {
+        tree1.buildTree([1, 2, 3, 4, 5, 6, 7]);
+         expect(tree1.findInOrderSuccessor(tree1.root).data).toBe(1)
+      });
+
+      // it('deletes using inorderSuccessor if node has 2 children', () => {
+      //   tree1.buildTree([1, 2, 3, 4, 5, 6, 7]);
+
+      //   expect(tree1.showTreeAsArray()).toStrictEqual([
+      //     { left: null, data: 1, right: null },
+      //     { left: 1, data: 2, right: 3 },
+      //     { left: null, data: 3, right: null },
+      //     { left: 2, data: 4, right: 6 },
+      //     { left: null, data: 5, right: null },
+      //     { left: 5, data: 6, right: 7 },
+      //     { left: null, data: 7, right: null },
+      //   ]);
+      // });
+      // tree1.delete(6);
+      // //FIXME: showTreeAsArray not working
+      // expect(tree1.showTreeAsArray()).toStrictEqual([
+      //   { left: null, data: 1, right: null },
+      //   { left: 1, data: 2, right: 3 },
+      //   { left: null, data: 3, right: null },
+      //   { left: 2, data: 4, right: 5 },
+      //   { left: null, data: 5, right: 7 },
+      //   { left: null, data: 7, right: null },
+      // ]);
+    });
+
+    // it('throws error if node has 2 children',()=>{
+    //   tree1.buildTree([1,2,3,4,5,6,7]);
+    //   // tree1.delete(6);
+    //   expect(tree1.delete).toThrow()
+    // })
     it('deletes node with 1 child', () => {
       tree1.buildTree([1, 2, 3, 4]);
       tree1.delete(3);

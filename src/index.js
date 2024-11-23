@@ -85,12 +85,6 @@ export class Tree {
       // base case - no child node to get in the way
       node[travelDirection] = new NodeBst(value);
     }
-    // compare values to determine whether to go left or right
-    // check if either node.left or node.right exists already
-    // if exists, continue - recurse
-    // if not, base case.
-    // create new node with value
-    // change reference to currentNode to the new node
   }
 
   showTreeAsArray() {
@@ -131,27 +125,27 @@ export class Tree {
   delete(value, node = this.root) {
     // TODO: check node's children
     // if value === node, match has been found
-    // ['left','right']
     if (!node) return;
     const performDeletion = (direction) => {
       const deleteTarget = node[direction];
       // deletion target has 2 children
       if (deleteTarget.left && deleteTarget.right) {
-        throw new Error('has 2 children');
+        this.findInOrderSuccessor(deleteTarget);
       }
       // deletion target is leafnode, has NO children
       if (!deleteTarget.left && !deleteTarget.right) {
         node[direction] = null;
       }
-      // deletion target has 2 children
+      // deletion target has 1 child
       if (deleteTarget.left || deleteTarget.right) {
-        //assign target's parent's references to a grandchild
+        // assign target's parent's references to a grandchild
         node[direction] = deleteTarget.left ? deleteTarget.left : deleteTarget.right;
       }
     };
 
     const findMatch = () => {
       ['left', 'right'].forEach((direction) => {
+        // match has been found, perform deletion
         if (node[direction] && value === node[direction].data) {
           performDeletion(direction);
           return node[direction];
@@ -161,18 +155,27 @@ export class Tree {
     };
     findMatch();
 
-    // TODO: delete target has children
+    // TODO: delete target has both children
 
     // travel
     // if value < node, set direction to left
     // if value > node, set direction to right
-    const travelDirection = this.compareValues(value, node.data);
-    // if match not found && reached end:
-    // value doesn't exist, return undefined
+  }
+
+  findInOrderSuccessor(deleteTarget) {
+    // staritng from deleteTarget, traverse down until you hit bottom
+    if (!deleteTarget) {
+      throw new Error(`deleteTarget ${deleteTarget} undefined`);
+    }
+    let node = deleteTarget;
+    while (node.left) {
+      node = node.left;
+    }
+    return node;
   }
 }
 
-const prettyPrint = (node, prefix = '', isLeft = true) => {
+function prettyPrint(node, prefix = '', isLeft = true) {
   if (node === null) {
     return;
   }
@@ -184,25 +187,16 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node.left !== null) {
     prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
   }
-};
+}
 const tree1 = new Tree();
-// const treeArray = [1, 2, 3, 4];
-const treeArray = [1, 2, 3, 4];
+const treeArray = [1, 2, 3, 4, 5, 6, 7];
 tree1.buildTree(treeArray);
-// tree1.insert(4)
-tree1.delete(3)
+console.log('%c before delete', 'color: #ff0000');
 prettyPrint(tree1.root);
-console.log('tree1.root:', tree1.root);
-// console.log( tree1.showTreeAsArray())
+console.log('%c after delete', 'color: #ff0000');
 console.table(tree1.showTreeAsArray());
-// const filtered = tree1.showTreeAsArray().filter((nodeItemObj) => {
-//   return nodeItemObj.left !== null || nodeItemObj.right !== null;
-// });
-// console.log('filtered:', filtered);
 
-// .forEach((nodeItemObj)=>{
-//   nodeItemObj.
-// })
+
 
 // OPT1:check if array length changes if turned into a set
 // OPT2: build a separate comparison array, iterate through it for every item of
