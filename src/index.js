@@ -29,13 +29,8 @@ export class Tree {
       if (recursionNumber > 30) {
         throw new Error('recursion callstack max exceeded');
       }
-      // Tracing recursion
-      // console.log('whichSubTree', whichSubTree);
-      // console.log('recursionNumber:', recursionNumber);
-      // console.log('startarray:',array);
 
       if (array.length === 0) {
-        // console.log('reached end (array.length = 0), stopping')
         return null;
       }
       // get middle, assign to root
@@ -43,8 +38,6 @@ export class Tree {
       const end = array.length - 1;
       const root = new NodeBst(array[middle]);
       // take left subarray, construct left subtree (recurse)
-      // console.log('middle:', middle);
-
       const leftSubArray = array.slice(0, middle);
       const rightSubArray = array.slice(middle + 1, end + 1);
 
@@ -69,13 +62,6 @@ export class Tree {
 
   insert(value, node = this.root) {
     // travel down the tree
-    // const compareValues = (value, currentNodeData) => {
-    //   if (value === currentNodeData) throw new Error('shouldnt have duplicate values');
-    //   if (value < currentNodeData) {
-    //     return this.TRAVEL_DIRECTION_ENUMS.LEFT;
-    //   }
-    //   return this.TRAVEL_DIRECTION_ENUMS.RIGHT;
-    // };
     const travelDirection = this.compareValues(value, node.data);
 
     // recursive case
@@ -104,16 +90,12 @@ export class Tree {
   }
 
   inOrder(callback, node = this.root) {
-    // callback(node);
     // inOrder: LEFT, DATA, RIGHT
-    // LIFO stack
-
     // visit left
     if (node.left) {
       this.inOrder(callback, node.left);
     }
     // visit node(data)
-    // console.log(node.data);
     callback(node);
     // visit right
     if (node.right) {
@@ -123,18 +105,22 @@ export class Tree {
   }
 
   delete(value, node = this.root) {
-    // TODO: check node's children
-    // if value === node, match has been found
     if (!node) return;
     const performDeletion = (direction) => {
       const deleteTarget = node[direction];
       // deletion target has 2 children
       if (deleteTarget.left && deleteTarget.right) {
-        this.findInOrderSuccessor(deleteTarget);
+        const { node: successor, nodeParent: successorParent } = this.findInOrderSuccessor(deleteTarget);
+        // set data of deleteTarget's parent's reference to its successor's data
+        node[direction].data = successor.data;
+        // replace reference to the successor with its child (grandpa is now father)
+        successorParent.left = successor.right;
+        return;
       }
       // deletion target is leafnode, has NO children
       if (!deleteTarget.left && !deleteTarget.right) {
         node[direction] = null;
+        return;
       }
       // deletion target has 1 child
       if (deleteTarget.left || deleteTarget.right) {
@@ -154,12 +140,6 @@ export class Tree {
       });
     };
     findMatch();
-
-    // TODO: delete target has both children
-
-    // travel
-    // if value < node, set direction to left
-    // if value > node, set direction to right
   }
 
   findInOrderSuccessor(deleteTarget) {
@@ -168,10 +148,14 @@ export class Tree {
       throw new Error(`deleteTarget ${deleteTarget} undefined`);
     }
     let node = deleteTarget;
+    let nodeParent;
     while (node.left) {
+      nodeParent = node;
       node = node.left;
     }
-    return node;
+    console.log('node:', node);
+    console.log('nodeParent:', nodeParent);
+    return { node, nodeParent }; // FIXMEn
   }
 }
 
@@ -189,14 +173,15 @@ function prettyPrint(node, prefix = '', isLeft = true) {
   }
 }
 const tree1 = new Tree();
-const treeArray = [1, 2, 3, 4, 5, 6, 7];
+const treeArray = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20];
 tree1.buildTree(treeArray);
 console.log('%c before delete', 'color: #ff0000');
 prettyPrint(tree1.root);
+tree1.delete(16);
 console.log('%c after delete', 'color: #ff0000');
+prettyPrint(tree1.root);
+
 console.table(tree1.showTreeAsArray());
-
-
 
 // OPT1:check if array length changes if turned into a set
 // OPT2: build a separate comparison array, iterate through it for every item of
