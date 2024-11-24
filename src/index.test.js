@@ -3,6 +3,18 @@ import { NodeBst, Tree } from './index.js';
 describe('Tree class', () => {
   const tree1 = new Tree();
   let testAnswer;
+  describe('preOrder traversal', () => {
+    it('throws error if no callback', () => {
+      tree1.buildTree([1, 2, 3, 4, 5, 6]);
+      expect(tree1.preOrder).toThrow();
+    });
+    it('visits DATA->LEFT->RIGHT', () => {
+      tree1.buildTree([3, 1, 2, 5, 4, 6]);
+      const resultNodeArray = [];
+      tree1.preOrder((node) => resultNodeArray.push(node.data));
+      expect(resultNodeArray).toStrictEqual([3, 1, 2, 5, 4, 6]);
+    });
+  });
   describe('levelOrder traversal', () => {
     it('throws error if no callback', () => {
       tree1.buildTree([1, 2, 3, 4, 5, 6]);
@@ -11,13 +23,13 @@ describe('Tree class', () => {
 
     it('visits nodes in a breadth first fashion', () => {
       tree1.buildTree([1, 2, 3, 4, 5, 6]);
-      let resultNodeArray = [];
+      const resultNodeArray = [];
       tree1.levelOrder((node) => resultNodeArray.push(node.data));
-      expect(resultNodeArray).toStrictEqual([3,1,5,2,4,6]);
+      expect(resultNodeArray).toStrictEqual([3, 1, 5, 2, 4, 6]);
     });
     it('visits nodes in an inorder fashion', () => {
       tree1.buildTree([4, 2, 6, 1, 3, 5, 7]);
-      let resultNodeArray = [];
+      const resultNodeArray = [];
       tree1.inOrder((node) => resultNodeArray.push(node.data));
       expect(resultNodeArray).toStrictEqual([1, 2, 3, 4, 5, 6, 7]);
     });
@@ -116,8 +128,7 @@ describe('Tree class', () => {
       const arrayOfLeftRightReferences = [];
       tree1.showTreeAsArray().forEach((nodeItemObject) => {
         ['left', 'right'].forEach((property) => {
-          if (nodeItemObject[property] !== null)
-            arrayOfLeftRightReferences.push(nodeItemObject[property]);
+          if (nodeItemObject[property] !== null) arrayOfLeftRightReferences.push(nodeItemObject[property]);
         });
       });
 

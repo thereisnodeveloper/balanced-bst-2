@@ -110,6 +110,17 @@ export class Tree {
 
   preOrder(callback, node = this.root) {
     // preOrder: DATA, LEFT, RIGHT
+    if(!callback) throw new Error ('no callback')
+      //visit node(data)
+      callback(node)
+      //visit left
+      if(node.left){
+        this.preOrder(callback, node.left)
+      }
+      //visit right
+      if(node.right){
+        this.preOrder(callback,node.right)
+      }
   }
 
   delete(value, node = this.root) {
