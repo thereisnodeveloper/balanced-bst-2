@@ -198,13 +198,55 @@ export class Tree {
   levelOrder(callback, queueArray = [this.root]) {
     if (!callback) throw new Error('no callback function');
     const node = queueArray.shift();
-    callback(node);
+    callback(node); 
     //base case
     if (!node.left && !node.right && queueArray.length <= 0) return;
     if (node.left) queueArray.push(node.left);
     if (node.right) queueArray.push(node.right);
 
-    this.levelOrder(callback, queueArray);
+    this.levelOrder(callback, queueArray );
+  }
+  height(node){
+    //get: number of edges in the longest path from a given node to a leaf node
+    
+    //OPTION1: generate paths & find one with highest length
+    //start at given node 
+    //create new path (array)
+    //go left if node has never been visited
+    //otherwise go rightarrayForThisLevel2, count
+    //whenever there's a fork in the road, copy the current array and feed it to
+    //the "side road"
+    //node is added to path
+    //count++ every time a new jump is made to another node
+    //if you hit leaf node, save path and push to array
+    //start from 
+
+    /*OPTION2: "chop" method - cut the tree, removing nodes and replacing them
+    with their children */
+    //no matter whether node has 1 or 2 children, 1 "chop" counts as 1 operation
+    //stop chopping 
+    
+    //OPTION3: "modified levelOrder traversal"
+    //get all children of node, save to arrayForThisLevel
+    //loop through the whole arrayForThisLevel and
+    //add children of all items to arrayForThisLevel2
+    //when done, count++
+    //return {arrayForThisLevel2, count}
+  }
+
+  heightWay1PathBased(node = this.root){
+    //OPTION1: generate paths & find one with highest length
+    //start at given node 
+    //create new path (array)
+    const path = []
+    //go left if node has never been visited
+    //otherwise go right, count
+    //whenever there's a fork in the road, copy the current array and feed it to
+    //the "side road"
+    //node is added to path
+    //count++ every time a new jump is made to another node
+    //if you hit leaf node, save path and push to array
+    //start from 
   }
 }
 
@@ -222,10 +264,10 @@ function prettyPrint(node, prefix = '', isLeft = true) {
   }
 }
 const tree1 = new Tree();
-// const treeArray = [1, 2, 3, 4, 5, 6];
-// tree1.buildTree(treeArray);
+const treeArray = [1, 2, 3, 4, 5, 6];
+tree1.buildTree(treeArray);
 
-tree1.buildTree([3, 2, 1]);
+// tree1.buildTree([3, 2, 1]);
 
 // console.log('%c before delete', 'color: #ff0000');
 prettyPrint(tree1.root);
@@ -240,4 +282,3 @@ console.table(tree1.showTreeAsArray());
 // the original array
 // OPT3: forEach, some - nest loop, bad O(n)
 // DECISION: go with OPT1; cant find alternatives no internet
-
