@@ -108,6 +108,10 @@ export class Tree {
     // return null;
   }
 
+  preOrder(callback, node = this.root) {
+    // preOrder: DATA, LEFT, RIGHT
+  }
+
   delete(value, node = this.root) {
     if (!node) return;
     const performDeletion = (direction) => {
