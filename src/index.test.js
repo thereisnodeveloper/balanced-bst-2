@@ -13,7 +13,7 @@ describe('Tree class', () => {
       tree1.buildTree([1, 2, 3, 4, 5, 6]);
       let resultNodeArray = [];
       tree1.levelOrder((node) => resultNodeArray.push(node.data));
-      expect(resultNodeArray).toStrictEqual([3, 2, 4, 1, 5, 6]);
+      expect(resultNodeArray).toStrictEqual([3,1,5,2,4,6]);
     });
   });
 
