@@ -77,22 +77,23 @@ export class Tree {
     const outputArray = [];
     this.inOrder((node) => {
       const nodeItem = { left: null, data: null, right: null };
-      if(node){
-      if (node.left) {
-        nodeItem.left = node.left.data;
+      if (node) {
+        if (node.left) {
+          nodeItem.left = node.left.data;
+        }
+        nodeItem.data = node.data;
+        if (node.right) {
+          nodeItem.right = node.right.data;
+        }
+        outputArray.push(nodeItem);
       }
-      nodeItem.data = node.data;
-      if (node.right) {
-        nodeItem.right = node.right.data;
-      }
-      outputArray.push(nodeItem);}
-    })
+    });
     return outputArray;
   }
 
   inOrder(callback, node = this.root) {
     // inOrder: LEFT, DATA, RIGHT
-    if(!node) return
+    if (!node) return;
 
     // visit left
     if (node.left) {
@@ -157,11 +158,31 @@ export class Tree {
       nodeParent = node;
       node = node.left;
     }
-    return { node, nodeParent }; 
+    return { node, nodeParent };
   }
-  levelOrder(callback){
-    if(!callback) throw new Error ('no callback function')
-      
+
+  levelOrder(callback, queueArray = [this.root]) {
+    if (!callback) throw new Error('no callback function');
+    if (queueArray.length <= 0) return 'DONEZO';
+    const node = queueArray.pop();
+    callback(node);
+    if (!node.left && !node.right) return queueArray;
+    if (node.left) queueArray.push(node.left);
+    if (node.right) queueArray.push(node.right);
+
+    levelOrder(callback, queueArray);
+
+    //go to node - 3
+    //add node to queue
+    //get children - 2, 4
+    //add children to queue
+    //go to 1st child in queue
+
+    //pop visited node from queue
+
+    //BASE CASE: return array as is, if children are null
+
+    //BASE CASE: queue empty && children are null, return
   }
 }
 

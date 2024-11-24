@@ -11,10 +11,9 @@ describe('Tree class', () => {
 
     it('visits nodes in a breadth first fashion', () => {
       tree1.buildTree([1, 2, 3, 4, 5, 6]);
-      let resultNodeArray;
-      expect(tree1.levelOrder((node) => resultNodeArray.push(node.data))).toStrictEqual([
-        3, 2, 4, 1, 5, 6,
-      ]);
+      let resultNodeArray = [];
+      tree1.levelOrder((node) => resultNodeArray.push(node.data));
+      expect(resultNodeArray).toStrictEqual([3, 2, 4, 1, 5, 6]);
     });
   });
 
