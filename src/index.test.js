@@ -4,6 +4,20 @@ describe('Tree class', () => {
   const tree1 = new Tree();
   let testAnswer;
   describe('preOrder traversal', () => {
+    it('handles an empty tree', () => {
+      const emptyTree = new Tree();
+      const resultNodeArray = [];
+      emptyTree.preOrder((node) => resultNodeArray.push(node.data));
+      expect(resultNodeArray).toStrictEqual([]);
+    });
+  
+    it('handles a tree with only a root node', () => {
+      tree1.buildTree([1]);
+      const resultNodeArray = [];
+      tree1.preOrder((node) => resultNodeArray.push(node.data));
+      expect(resultNodeArray).toStrictEqual([1]);
+    });
+  
     it('throws error if no callback', () => {
       tree1.buildTree([1, 2, 3, 4, 5, 6]);
       expect(tree1.preOrder).toThrow();

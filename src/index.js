@@ -110,17 +110,19 @@ export class Tree {
 
   preOrder(callback, node = this.root) {
     // preOrder: DATA, LEFT, RIGHT
-    if(!callback) throw new Error ('no callback')
-      //visit node(data)
-      callback(node)
-      //visit left
-      if(node.left){
-        this.preOrder(callback, node.left)
-      }
-      //visit right
-      if(node.right){
-        this.preOrder(callback,node.right)
-      }
+    //handle empty tree
+    if (!this.root) return;
+    if (!callback) throw new Error('no callback');
+    //visit node(data)
+    callback(node);
+    //visit left
+    if (node.left) {
+      this.preOrder(callback, node.left);
+    }
+    //visit right
+    if (node.right) {
+      this.preOrder(callback, node.right);
+    }
   }
 
   delete(value, node = this.root) {
@@ -203,9 +205,11 @@ function prettyPrint(node, prefix = '', isLeft = true) {
   }
 }
 const tree1 = new Tree();
-// const treeArray = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20];
-const treeArray = [1, 2, 3, 4, 5, 6];
-tree1.buildTree(treeArray);
+// const treeArray = [1, 2, 3, 4, 5, 6];
+// tree1.buildTree(treeArray);
+
+tree1.buildTree([3, 2, 1]);
+
 // console.log('%c before delete', 'color: #ff0000');
 prettyPrint(tree1.root);
 // tree1.delete(16);
@@ -220,4 +224,3 @@ console.table(tree1.showTreeAsArray());
 // OPT3: forEach, some - nest loop, bad O(n)
 // DECISION: go with OPT1; cant find alternatives no internet
 
-tree1.levelOrder((node) => console.log(node));
