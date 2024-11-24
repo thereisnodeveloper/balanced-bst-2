@@ -3,6 +3,12 @@ import { NodeBst, Tree } from './index.js';
 describe('Tree class', () => {
   const tree1 = new Tree();
   let testAnswer;
+  describe('postOrder traversal',()=>{
+    it('throws error if no callback', () => {
+      tree1.buildTree([1, 2, 3, 4, 5, 6]);
+      expect(tree1.preOrder).toThrow();
+    });
+  })
   describe('preOrder traversal', () => {
     it('handles an empty tree', () => {
       const emptyTree = new Tree();

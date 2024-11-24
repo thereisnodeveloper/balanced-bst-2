@@ -125,6 +125,23 @@ export class Tree {
     }
   }
 
+  postOrder(callback, node = this.root) {
+    // postOrder: LEFT, RIGHT, DATA
+    if (!callback) throw new Error('no callback');
+    
+    //visit node(data)
+    callback(node);
+    //visit left
+    if (node.left) {
+      this.preOrder(callback, node.left);
+    }
+    //visit right
+    if (node.right) {
+      this.preOrder(callback, node.right);
+    }
+  }
+
+
   delete(value, node = this.root) {
     if (!node) return;
     const performDeletion = (direction) => {
