@@ -162,29 +162,15 @@ export class Tree {
   }
 
   levelOrder(callback, queueArray = [this.root]) {
-    console.log('queueArray:', queueArray)
     if (!callback) throw new Error('no callback function');
-    
-    if (queueArray.length <= 0) return 'DONEZO';
     const node = queueArray.shift();
     callback(node);
-    if (!node.left && !node.right) return queueArray;
+    //base case
+    if (!node.left && !node.right && queueArray.length <= 0) return;
     if (node.left) queueArray.push(node.left);
     if (node.right) queueArray.push(node.right);
 
     this.levelOrder(callback, queueArray);
-
-    //go to node - 3
-    //add node to queue
-    //get children - 2, 4
-    //add children to queue
-    //go to 1st child in queue
-
-    //pop visited node from queue
-
-    //BASE CASE: return array as is, if children are null
-
-    //BASE CASE: queue empty && children are null, return
   }
 }
 
@@ -203,7 +189,7 @@ function prettyPrint(node, prefix = '', isLeft = true) {
 }
 const tree1 = new Tree();
 // const treeArray = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20];
-const treeArray = [1,2,3,4,5,6];
+const treeArray = [1, 2, 3, 4, 5, 6];
 tree1.buildTree(treeArray);
 // console.log('%c before delete', 'color: #ff0000');
 prettyPrint(tree1.root);
@@ -219,4 +205,4 @@ console.table(tree1.showTreeAsArray());
 // OPT3: forEach, some - nest loop, bad O(n)
 // DECISION: go with OPT1; cant find alternatives no internet
 
-tree1.levelOrder((node)=>console.log(node))
+tree1.levelOrder((node) => console.log(node));
