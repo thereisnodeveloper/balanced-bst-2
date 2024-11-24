@@ -3,12 +3,20 @@ import { NodeBst, Tree } from './index.js';
 describe('Tree class', () => {
   const tree1 = new Tree();
   let testAnswer;
-describe('levelOrder traversal', ()=>{
-  it('throws error if no callback', ()=>{
-    tree1.buildTree([1,2,3,4,5,6])
-    expect(tree1.levelOrder).toThrow()
-  })
-})
+  describe('levelOrder traversal', () => {
+    it('throws error if no callback', () => {
+      tree1.buildTree([1, 2, 3, 4, 5, 6]);
+      expect(tree1.levelOrder).toThrow();
+    });
+
+    it('visits nodes in a breadth first fashion', () => {
+      tree1.buildTree([1, 2, 3, 4, 5, 6]);
+      let resultNodeArray;
+      expect(tree1.levelOrder((node) => resultNodeArray.push(node.data))).toStrictEqual([
+        3, 2, 4, 1, 5, 6,
+      ]);
+    });
+  });
 
   describe('deletion', () => {
     it('exists', () => {
