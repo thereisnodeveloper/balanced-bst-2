@@ -77,6 +77,7 @@ export class Tree {
     const outputArray = [];
     this.inOrder((node) => {
       const nodeItem = { left: null, data: null, right: null };
+      if(node){
       if (node.left) {
         nodeItem.left = node.left.data;
       }
@@ -84,13 +85,15 @@ export class Tree {
       if (node.right) {
         nodeItem.right = node.right.data;
       }
-      outputArray.push(nodeItem);
-    });
+      outputArray.push(nodeItem);}
+    })
     return outputArray;
   }
 
   inOrder(callback, node = this.root) {
     // inOrder: LEFT, DATA, RIGHT
+    if(!node) return
+
     // visit left
     if (node.left) {
       this.inOrder(callback, node.left);
@@ -101,7 +104,7 @@ export class Tree {
     if (node.right) {
       this.inOrder(callback, node.right);
     }
-    return null;
+    // return null;
   }
 
   delete(value, node = this.root) {
@@ -110,7 +113,8 @@ export class Tree {
       const deleteTarget = node[direction];
       // deletion target has 2 children
       if (deleteTarget.left && deleteTarget.right) {
-        const { node: successor, nodeParent: successorParent } = this.findInOrderSuccessor(deleteTarget);
+        const { node: successor, nodeParent: successorParent } =
+          this.findInOrderSuccessor(deleteTarget);
         // set data of deleteTarget's parent's reference to its successor's data
         node[direction].data = successor.data;
         // replace reference to the successor with its child (grandpa is now father)
@@ -153,9 +157,11 @@ export class Tree {
       nodeParent = node;
       node = node.left;
     }
-    console.log('node:', node);
-    console.log('nodeParent:', nodeParent);
-    return { node, nodeParent }; // FIXMEn
+    return { node, nodeParent }; 
+  }
+  levelOrder(callback){
+    if(!callback) throw new Error ('no callback function')
+      
   }
 }
 
