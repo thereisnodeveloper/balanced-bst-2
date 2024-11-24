@@ -6,7 +6,13 @@ describe('Tree class', () => {
   describe('postOrder traversal',()=>{
     it('throws error if no callback', () => {
       tree1.buildTree([1, 2, 3, 4, 5, 6]);
-      expect(tree1.preOrder).toThrow();
+      expect(tree1.postOrder).toThrow();
+    });
+    it('visits LEFT, RIGHT, DATA', () => {
+      tree1.buildTree([3, 1, 2, 5, 4, 6]);
+      const resultNodeArray = [];
+      tree1.postOrder((node) => resultNodeArray.push(node.data));
+      expect(resultNodeArray).toStrictEqual([2,1,4,6,5,3]);
     });
   })
   describe('preOrder traversal', () => {

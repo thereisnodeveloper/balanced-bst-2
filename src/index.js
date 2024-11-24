@@ -129,16 +129,16 @@ export class Tree {
     // postOrder: LEFT, RIGHT, DATA
     if (!callback) throw new Error('no callback');
     
-    //visit node(data)
-    callback(node);
     //visit left
     if (node.left) {
-      this.preOrder(callback, node.left);
+      this.postOrder(callback, node.left);
     }
     //visit right
     if (node.right) {
-      this.preOrder(callback, node.right);
+      this.postOrder(callback, node.right);
     }
+    //visit node(data)
+    callback(node);
   }
 
 
