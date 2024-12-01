@@ -110,16 +110,16 @@ export class Tree {
 
   preOrder(callback, node = this.root) {
     // preOrder: DATA, LEFT, RIGHT
-    //handle empty tree
+    // handle empty tree
     if (!this.root) return;
     if (!callback) throw new Error('no callback');
-    //visit node(data)
+    // visit node(data)
     callback(node);
-    //visit left
+    // visit left
     if (node.left) {
       this.preOrder(callback, node.left);
     }
-    //visit right
+    // visit right
     if (node.right) {
       this.preOrder(callback, node.right);
     }
@@ -128,19 +128,18 @@ export class Tree {
   postOrder(callback, node = this.root) {
     // postOrder: LEFT, RIGHT, DATA
     if (!callback) throw new Error('no callback');
-    
-    //visit left
+
+    // visit left
     if (node.left) {
       this.postOrder(callback, node.left);
     }
-    //visit right
+    // visit right
     if (node.right) {
       this.postOrder(callback, node.right);
     }
-    //visit node(data)
+    // visit node(data)
     callback(node);
   }
-
 
   delete(value, node = this.root) {
     if (!node) return;
@@ -198,59 +197,78 @@ export class Tree {
   levelOrder(callback, queueArray = [this.root]) {
     if (!callback) throw new Error('no callback function');
     const node = queueArray.shift();
-    callback(node); 
-    //base case
+    callback(node);
+    // base case
     if (!node.left && !node.right && queueArray.length <= 0) return;
     if (node.left) queueArray.push(node.left);
     if (node.right) queueArray.push(node.right);
 
-    this.levelOrder(callback, queueArray );
+    this.levelOrder(callback, queueArray);
   }
-  height(node){
-    //get: number of edges in the longest path from a given node to a leaf node
-    
-    //OPTION1: generate paths & find one with highest length
-    //start at given node 
-    //create new path (array)
-    //go left if node has never been visited
-    //otherwise go rightarrayForThisLevel2, count
-    //whenever there's a fork in the road, copy the current array and feed it to
-    //the "side road"
-    //node is added to path
-    //count++ every time a new jump is made to another node
-    //if you hit leaf node, save path and push to array
-    //start from 
 
-    /*OPTION2: "chop" method - cut the tree, removing nodes and replacing them
+  height(node) {
+    // get: number of edges in the longest path from a given node to a leaf node
+    // OPTION1: generate paths & find one with highest length
+    // start at given node
+    // create new path (array)
+    // go left if node has never been visited
+    // otherwise go rightarrayForThisLevel2, count
+    // whenever there's a fork in the road, copy the current array and feed it to
+    // the "side road"
+    // node is added to path
+    // count++ every time a new jump is made to another node
+    // if you hit leaf node, save path and push to array
+    // start from
+    /* OPTION2: "chop" method - cut the tree, removing nodes and replacing them
     with their children */
-    //no matter whether node has 1 or 2 children, 1 "chop" counts as 1 operation
-    //stop chopping 
-    
-    //OPTION3: "modified levelOrder traversal"
-    //get all children of node, save to arrayForThisLevel
-    //loop through the whole arrayForThisLevel and
-    //add children of all items to arrayForThisLevel2
-    //when done, count++
-    //return {arrayForThisLevel2, count}
-
-    //OPTION4: use callback with inOrder(depth-first) traversal, keep track of
-    //max traversal, refresh when hitting leaf node
-
+    // no matter whether node has 1 or 2 children, 1 "chop" counts as 1 operation
+    // stop chopping
+    // OPTION3: "modified levelOrder traversal"
+    // get all children of node, save to arrayForThisLevel
+    // loop through the whole arrayForThisLevel and
+    // add children of all items to arrayForThisLevel2
+    // when done, count++
+    // return {arrayForThisLevel2, count}
+    // OPTION4: use callback with inOrder(depth-first) traversal, keep track of
+    // max traversal, count++ when going down
+    //count-- when going up
+    //if conut > max, save count to max when hitting leaf
+    //return max after end of traversal
   }
 
-  heightWay1PathBased(node = this.root){
-    //OPTION1: generate paths & find one with highest length
-    //start at given node 
-    //create new path (array)
-    const path = []
-    //go left if node has never been visited
-    //otherwise go right, count
-    //whenever there's a fork in the road, copy the current array and feed it to
-    //the "side road"
-    //node is added to path
-    //count++ every time a new jump is made to another node
-    //if you hit leaf node, save path and push to array
-    //start from 
+  heightWay1PathBased(node = this.root, allPaths = [], singlePath) {
+    let newPath;
+    if (singlePath) {
+      newPath = singlePath;
+    } else {
+      newPath = [];
+    }
+    newPath.push(node);
+    // OPTION1: generate paths & find one with highest length
+    // start at given node
+    // create new path (array)
+    if (node.left) {
+      this.heightWay1PathBased(node.left, allPaths, newPath);
+    }
+    if (node.right) {
+      this.heightWay1PathBased(node.right, allPaths, newPath);
+    }
+
+    if (!node.left && !node.right) {
+      allPaths.push(newPath);
+      newPath = null;
+      return
+    }
+
+    return allPaths;
+    // go left if node has never been visited
+    // otherwise go right, count
+    // whenever there's a fork in the road, copy the current array and feed it to
+    // the "side road"
+    // node is added to path
+    // count++ every time a new jump is made to another node
+    // if you hit leaf node, save path and push to array
+    // start from
   }
 }
 
@@ -286,3 +304,4 @@ console.table(tree1.showTreeAsArray());
 // the original array
 // OPT3: forEach, some - nest loop, bad O(n)
 // DECISION: go with OPT1; cant find alternatives no internet
+console.log(tree1.heightWay1PathBased());
