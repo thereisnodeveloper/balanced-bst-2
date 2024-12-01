@@ -232,6 +232,10 @@ export class Tree {
     //add children of all items to arrayForThisLevel2
     //when done, count++
     //return {arrayForThisLevel2, count}
+
+    //OPTION4: use callback with inOrder(depth-first) traversal, keep track of
+    //max traversal, refresh when hitting leaf node
+
   }
 
   heightWay1PathBased(node = this.root){
