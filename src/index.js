@@ -231,18 +231,34 @@ export class Tree {
     // return {arrayForThisLevel2, count}
     // OPTION4: use callback with inOrder(depth-first) traversal, keep track of
     // max traversal, count++ when going down
-    //count-- when going up
-    //if conut > max, save count to max when hitting leaf
-    //return max after end of traversal
+    // count-- when going up
+    // if conut > max, save count to max when hitting leaf
+    // return max after end of traversald
+  }
+
+  heightWay4TraversalBased(node = this.root, count = 1, max = 0) {
+    // whenever visiting LEFT or RIGHT, ++count
+    // whenever finishing the entire DLR function, --count (returning and going back
+    // up the function  )
+
+    if (!node) {
+      if (count > max) max = count;
+      // return count;
+    }
+    if (node.left) {
+      this.heightWay4TraversalBased(node.left, ++count);
+    }
+    if (node.right) {
+      this.heightWay4TraversalBased(node.right, ++count);
+    }
+    return --count;
+
+    //! !! store count in callback
   }
 
   heightWay1PathBased(node = this.root, allPaths = [], singlePath) {
     let newPath;
-    if (singlePath) {
-      newPath = singlePath;
-    } else {
-      newPath = [];
-    }
+    newPath = singlePath || [];
     newPath.push(node);
     // OPTION1: generate paths & find one with highest length
     // start at given node
@@ -257,7 +273,7 @@ export class Tree {
     if (!node.left && !node.right) {
       allPaths.push(newPath);
       newPath = null;
-      return
+      return;
     }
 
     return allPaths;
@@ -299,9 +315,11 @@ prettyPrint(tree1.root);
 
 console.table(tree1.showTreeAsArray());
 
-// OPT1:check if array length changes if turned into a set
-// OPT2: build a separate comparison array, iterate through it for every item of
+// DECISION: how to check if 2 arrays are different
+// OPTION1:check if array length changes if turned into a set
+// OPTION2: build a separate comparison array, iterate through it for every item of
 // the original array
-// OPT3: forEach, some - nest loop, bad O(n)
+// OPTION3: forEach, some - nest loop, bad O(n)
 // DECISION: go with OPT1; cant find alternatives no internet
-console.log(tree1.heightWay1PathBased());
+
+console.log( tree1.heightWay4TraversalBased())
