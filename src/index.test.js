@@ -5,9 +5,14 @@ describe('Tree class', () => {
   let testAnswer;
 
   describe('approach1 - path based ', () => {
+    it('takes 0-7, returns 4 paths', () => {
+      tree1.buildTree([0, 1, 2, 3, 4, 5, 6, 7]);
+      expect(tree1.heightWay1PathBased().length).toBe(4)
+    });
+
     it('takes 0-7, returns height = 4', () => {
       tree1.buildTree([0, 1, 2, 3, 4, 5, 6, 7]);
-      expect(tree1.heightWay1PathBased()).toBe(4)
+      expect(tree1.heightWay1PathBased()).toBe(4);
     });
   });
   describe('postOrder traversal', () => {
