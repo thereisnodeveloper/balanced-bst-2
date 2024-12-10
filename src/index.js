@@ -149,8 +149,7 @@ export class Tree {
       const deleteTarget = node[direction];
       // deletion target has 2 children
       if (deleteTarget.left && deleteTarget.right) {
-        const { node: successor, nodeParent: successorParent } =
-          this.findInOrderSuccessor(deleteTarget);
+        const { node: successor, nodeParent: successorParent } = this.findInOrderSuccessor(deleteTarget);
         // set data of deleteTarget's parent's reference to its successor's data
         node[direction].data = successor.data;
         // replace reference to the successor with its child (grandpa is now father)
@@ -238,9 +237,9 @@ export class Tree {
     // if conut > max, save count to max when hitting leaf
     // return max after end of traversald
   }
-  //heightWay1PathBased(node = this.root){
+  // heightWay1PathBased(node = this.root){
   //
-  //}
+  // }
 
   /**
    *
@@ -265,7 +264,7 @@ export class Tree {
   }
 
   heightWay1PathBased(node = this.root, allPaths = [], singlePath) {
-    let newPath; //maybe use a path class?
+    let newPath; // maybe use a path class?
     newPath = singlePath || [];
     newPath.push(node);
     // OPTION1: generate paths & find one with highest length
@@ -279,10 +278,17 @@ export class Tree {
     }
 
     if (!node.left && !node.right) {
+      console.table(newPath)
       allPaths.push(newPath);
       newPath = null;
       return;
     }
+    const max = allPaths.reduce((previous, current) => {
+      let length
+      if (current.length > previous) length = previous;
+      return length;
+    },0);
+    // return max
 
     return allPaths;
     // go left if node has never been visited
@@ -311,13 +317,13 @@ function prettyPrint(node, prefix = '', isLeft = true) {
 }
 const tree1 = new Tree();
 // const treeArray = [1, 2, 3, 4, 5, 6];
-const treeArray = [0,1, 2, 3, 4, 5, 6, 7];
+const treeArray = [0, 1, 2, 3, 4, 5, 6, 7];
 tree1.buildTree(treeArray);
 
 // tree1.buildTree([3, 2, 1]);
 
 // console.log('%c before delete', 'color: #ff0000');
-prettyPrint(tree1.root);
+// prettyPrint(tree1.root);
 // tree1.delete(16);
 // console.log('%c after delete', 'color: #ff0000');
 // prettyPrint(tree1.root);
@@ -333,3 +339,5 @@ console.table(tree1.showTreeAsArray());
 
 // console.log('final count:  ', tree1.heightWay4TraversalBased()[1])
 console.log(tree1.height(tree1.root.right)[1]);
+
+tree1.heightWay1PathBased()
