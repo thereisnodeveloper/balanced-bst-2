@@ -108,7 +108,8 @@ export class Tree {
     // return null;
   }
 
-  preOrder(callback, node = this.root) {const treeArray = [1, 2, 3, 4, 5, 6,7, 8];
+  preOrder(callback, node = this.root) {
+    const treeArray = [1, 2, 3, 4, 5, 6, 7, 8];
 
     // preOrder: DATA, LEFT, RIGHT
     // handle empty tree
@@ -208,7 +209,7 @@ export class Tree {
   }
 
   height(node) {
-    return this.heightWay4TraversalBased(node)
+    return this.heightWay4TraversalBased(node);
     // get: number of edges in the longest path from a given node to a leaf node
     // OPTION1: generate paths & find one with highest length
     // start at given node
@@ -237,12 +238,15 @@ export class Tree {
     // if conut > max, save count to max when hitting leaf
     // return max after end of traversald
   }
+  //heightWay1PathBased(node = this.root){
+  //
+  //}
 
   /**
-   * 
-   * @param {*} node 
-   * @param {Number} count 
-   * @param {Number} maxHeight 
+   *
+   * @param {*} node
+   * @param {Number} count
+   * @param {Number} maxHeight
    * @returns an array containing the current count, and maxHeight [count, maxHeight]
    */
   heightWay4TraversalBased(node = this.root, count = 1, maxHeight = 0) {
@@ -250,46 +254,46 @@ export class Tree {
     // whenever finishing the entire DLR function, --count (returning and going back
     // up the function  )
     if (count > maxHeight) maxHeight = count;
-      
+
     if (node.left) {
       [count, maxHeight] = this.heightWay4TraversalBased(node.left, ++count, maxHeight);
     }
     if (node.right) {
-      [count, maxHeight] = count= this.heightWay4TraversalBased(node.right, ++count, maxHeight);
+      [count, maxHeight] = this.heightWay4TraversalBased(node.right, ++count, maxHeight);
     }
-    return [--count,maxHeight];
+    return [--count, maxHeight];
   }
 
-  // heightWay1PathBased(node = this.root, allPaths = [], singlePath) {
-  //   let newPath;
-  //   newPath = singlePath || [];
-  //   newPath.push(node);
-  //   // OPTION1: generate paths & find one with highest length
-  //   // start at given node
-  //   // create new path (array)
-  //   if (node.left) {
-  //     this.heightWay1PathBased(node.left, allPaths, newPath);
-  //   }
-  //   if (node.right) {
-  //     this.heightWay1PathBased(node.right, allPaths, newPath);
-  //   }
+  heightWay1PathBased(node = this.root, allPaths = [], singlePath) {
+    let newPath; //maybe use a path class?
+    newPath = singlePath || [];
+    newPath.push(node);
+    // OPTION1: generate paths & find one with highest length
+    // start at given node
+    // create new path (array)
+    if (node.left) {
+      this.heightWay1PathBased(node.left, allPaths, newPath);
+    }
+    if (node.right) {
+      this.heightWay1PathBased(node.right, allPaths, newPath);
+    }
 
-  //   if (!node.left && !node.right) {
-  //     allPaths.push(newPath);
-  //     newPath = null;
-  //     return;
-  //   }
+    if (!node.left && !node.right) {
+      allPaths.push(newPath);
+      newPath = null;
+      return;
+    }
 
-  //   return allPaths;
-  //   // go left if node has never been visited
-  //   // otherwise go right, count
-  //   // whenever there's a fork in the road, copy the current array and feed it to
-  //   // the "side road"
-  //   // node is added to path
-  //   // count++ every time a new jump is made to another node
-  //   // if you hit leaf node, save path and push to array
-  //   // start from
-  // }
+    return allPaths;
+    // go left if node has never been visited
+    // otherwise go right, count
+    // whenever there's a fork in the road, copy the current array and feed it to
+    // the "side road"
+    // node is added to path
+    // count++ every time a new jump is made to another node
+    // if you hit leaf node, save path and push to array
+    // start from
+  }
 }
 
 function prettyPrint(node, prefix = '', isLeft = true) {
@@ -307,7 +311,7 @@ function prettyPrint(node, prefix = '', isLeft = true) {
 }
 const tree1 = new Tree();
 // const treeArray = [1, 2, 3, 4, 5, 6];
-const treeArray = [1, 2, 3, 4, 5, 6,7, 8];
+const treeArray = [0,1, 2, 3, 4, 5, 6, 7];
 tree1.buildTree(treeArray);
 
 // tree1.buildTree([3, 2, 1]);
@@ -328,4 +332,4 @@ console.table(tree1.showTreeAsArray());
 // DECISION: go with OPT1; cant find alternatives no internet
 
 // console.log('final count:  ', tree1.heightWay4TraversalBased()[1])
-console.log(tree1.height(tree1.root.right)[1])
+console.log(tree1.height(tree1.root.right)[1]);

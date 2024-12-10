@@ -3,7 +3,14 @@ import { NodeBst, Tree } from './index.js';
 describe('Tree class', () => {
   const tree1 = new Tree();
   let testAnswer;
-  describe('postOrder traversal',()=>{
+
+  describe('approach1 - path based ', () => {
+    it('takes 0-7, returns height = 4', () => {
+      tree1.buildTree([0, 1, 2, 3, 4, 5, 6, 7]);
+      expect(tree1.heightWay1PathBased()).toBe(4)
+    });
+  });
+  describe('postOrder traversal', () => {
     it('throws error if no callback', () => {
       tree1.buildTree([1, 2, 3, 4, 5, 6]);
       expect(tree1.postOrder).toThrow();
@@ -12,9 +19,9 @@ describe('Tree class', () => {
       tree1.buildTree([3, 1, 2, 5, 4, 6]);
       const resultNodeArray = [];
       tree1.postOrder((node) => resultNodeArray.push(node.data));
-      expect(resultNodeArray).toStrictEqual([2,1,4,6,5,3]);
+      expect(resultNodeArray).toStrictEqual([2, 1, 4, 6, 5, 3]);
     });
-  })
+  });
   describe('preOrder traversal', () => {
     it('handles an empty tree', () => {
       const emptyTree = new Tree();
@@ -22,14 +29,14 @@ describe('Tree class', () => {
       emptyTree.preOrder((node) => resultNodeArray.push(node.data));
       expect(resultNodeArray).toStrictEqual([]);
     });
-  
+
     it('handles a tree with only a root node', () => {
       tree1.buildTree([1]);
       const resultNodeArray = [];
       tree1.preOrder((node) => resultNodeArray.push(node.data));
       expect(resultNodeArray).toStrictEqual([1]);
     });
-  
+
     it('throws error if no callback', () => {
       tree1.buildTree([1, 2, 3, 4, 5, 6]);
       expect(tree1.preOrder).toThrow();
@@ -154,7 +161,8 @@ describe('Tree class', () => {
       const arrayOfLeftRightReferences = [];
       tree1.showTreeAsArray().forEach((nodeItemObject) => {
         ['left', 'right'].forEach((property) => {
-          if (nodeItemObject[property] !== null) arrayOfLeftRightReferences.push(nodeItemObject[property]);
+          if (nodeItemObject[property] !== null)
+            arrayOfLeftRightReferences.push(nodeItemObject[property]);
         });
       });
 
