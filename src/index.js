@@ -266,16 +266,10 @@ export class Tree {
 
   heightWay1PathBased(node = this.root, currentPath = [], allPaths = []) {
     // OPTION1: generate paths & find one with highest length
-    // add current node to current path
-    // if node has both left and right, copy current array
-    // if LEAF node, push current path to an array
-
     currentPath.push(node);
     if (node.left && node.right) {
-      // call function again for RIGHT subtree
       const currentPathCopy = [...currentPath];
       this.heightWay1PathBased(node.left, currentPath, allPaths);
-      // call function again for LEFT subtree
       this.heightWay1PathBased(node.right, currentPathCopy, allPaths);
     } else {
       if (node.left) this.heightWay1PathBased(node.left, currentPath, allPaths);
@@ -291,52 +285,9 @@ export class Tree {
       if (currentItem.length > accumulator) max = currentItem.length;
       return max;
     }, 0);
-
-    // return allPaths.reduce((accumulator, currentItem)=>{
-    //   return accumulator + currentItem.length
-    // })
   }
 
-  // heightWay1PathBased(node = this.root, allPaths = [], singlePath) {
-  //   let newPath; // maybe use a path class?
-  //   newPath = singlePath || [];
-  //   newPath.push(node);
-  //   console.log(`pushing ${JSON.stringify(node)}`)
-  //   // OPTION1: generate paths & find one with highest length
-  //   // start at given node
-  //   // create new path (array)
-  //   if (node.left) {
-  //     this.heightWay1PathBased(node.left, allPaths, newPath);
-  //   };
-  //   if (node.right) {
-  //     this.heightWay1PathBased(node.right, allPaths, newPath);
-  //   }
 
-  //   if (!node.left && !node.right) {
-  //     console.table(newPath)
-  //     allPaths.push(newPath);
-  //     return newPath
-  //   }
-  //   newPath = null;
-  //   //!!! newpath shonewPath.push(node);uld be reset, let's check
-  //   console.log('newPath:', newPath)
-  //   const max = allPaths.reduce((previous, current) => {
-  //     let length
-  //     if (current.length > previous) length = previous;
-  //     return length;
-  //   },0);
-  //   // return max
-
-  //   return allPaths;
-  //   // go left if node has never been visited
-  //   // otherwise go right, count
-  //   // whenever there's a fork in the road, copy the current array and feed it to
-  //   // the "side road"
-  //   // node is added to path
-  //   // count++ every time a new jump is made to another node
-  //   // if you hit leaf node, save path and push to array
-  //   // start from
-  // }
 }
 
 function prettyPrint(node, prefix = '', isLeft = true) {
