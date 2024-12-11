@@ -19,15 +19,7 @@ describe('Tree class', () => {
       tree1.buildTree(array);
       expect(tree1.heightWay1PathBased()).toBe(expectedHeight);
     });
-    // tree1.buildTree
-    // it('takes 0-2, returns height = 2',()=>{
-    //   tree1.buildTree
-    // })
 
-    // it('takes 0-7, returns height = 4', () => {
-    //   tree1.buildTree([0, 1, 2, 3, 4, 5, 6, 7]);
-    //   expect(tree1.heightWay1PathBased()).toBe(4);
-    // });
   });
   describe('postOrder traversal', () => {
     it('throws error if no callback', () => {

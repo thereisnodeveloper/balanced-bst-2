@@ -212,16 +212,7 @@ export class Tree {
     return this.heightWay4TraversalBased(node);
     // get: number of edges in the longest path from a given node to a leaf node
     // OPTION1: generate paths & find one with highest length
-    // start at given node
-    // create new path (array)
-    // go left if node has never been visited
-    // otherwise go rightarrayForThisLevel2, count
-    // whenever there's a fork in the road, copy the current array and feed it to
-    // the "side road"
-    // node is added to path
-    // count++ every time a new jump is made to another node
-    // if you hit leaf node, save path and push to array
-    // start from
+    
     /* OPTION2: "chop" method - cut the tree, removing nodes and replacing them
     with their children */
     // no matter whether node has 1 or 2 children, 1 "chop" counts as 1 operation
@@ -238,9 +229,6 @@ export class Tree {
     // if conut > max, save count to max when hitting leaf
     // return max after end of traversald
   }
-  // heightWay1PathBased(node = this.root){
-  //
-  // }
 
   /**
    *
