@@ -3,6 +3,11 @@ import { NodeBst, Tree } from './index.js';
 describe('Tree class', () => {
   const tree1 = new Tree();
   let testAnswer;
+  describe('depth', () => {
+    it('exists',()=>{
+      expect(tree1.depth).toBeDefined()
+    })
+  });
 
   describe('approach1 - path based ', () => {
     // it('takes 0-7, returns 4 paths', () => {
@@ -19,7 +24,6 @@ describe('Tree class', () => {
       tree1.buildTree(array);
       expect(tree1.heightWay1PathBased()).toBe(expectedHeight);
     });
-
   });
   describe('postOrder traversal', () => {
     it('throws error if no callback', () => {
