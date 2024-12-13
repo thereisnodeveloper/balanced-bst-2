@@ -212,7 +212,7 @@ export class Tree {
     return this.heightWay4TraversalBased(node);
     // get: number of edges in the longest path from a given node to a leaf node
     // OPTION1: generate paths & find one with highest length
-    
+
     /* OPTION2: "chop" method - cut the tree, removing nodes and replacing them
     with their children */
     // no matter whether node has 1 or 2 children, 1 "chop" counts as 1 operation
@@ -268,7 +268,7 @@ export class Tree {
     if (!node.left && !node.right) {
       allPaths.push(currentPath);
     }
-    let max = 0
+    let max = 0;
     return allPaths.reduce((accumulator, currentItem) => {
       if (currentItem.length > accumulator) max = currentItem.length;
       return max;
@@ -276,9 +276,16 @@ export class Tree {
   }
 
   //the number of edges in the path from a given node to the tree’s root node.
-  depth(targetNode,currentNode = this.root){
+  depth(targetNode, currentNode = this.root, count = 0) {
+    //start with root
+    //traverse through the whole tree
+    //add count
+    //BASE CASE: reached leaf
+    //reset count OR -1 from count every time function is returned
+    
+    //BASE CASE: reached target
+    if(currentNode ===targetNode) return count
   }
-
 }
 
 function prettyPrint(node, prefix = '', isLeft = true) {
