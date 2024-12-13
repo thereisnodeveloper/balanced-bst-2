@@ -4,9 +4,15 @@ describe('Tree class', () => {
   const tree1 = new Tree();
   let testAnswer;
   describe('depth', () => {
-    it('exists',()=>{
-      expect(tree1.depth).toBeDefined()
-    })
+    it('exists', () => {
+      expect(tree1.depth).toBeDefined();
+    });
+    it('returns depth of 1 when targetNode is root.right ', () => {
+      tree1.buildTree([0, 1, 2, 3, 4, 5, 6, 7]);
+      expect(tree1.depth(tree1.root.right)).toBe(1);
+    });
+
+    //TODO: test case where given node is NOT root
   });
 
   describe('approach1 - path based ', () => {

@@ -276,7 +276,8 @@ export class Tree {
   }
 
   //the number of edges in the path from a given node to the tree’s root node.
-  depth(){}
+  depth(targetNode,currentNode = this.root){
+  }
 
 }
 
@@ -304,7 +305,7 @@ tree1.buildTree(treeArray);
 // prettyPrint(tree1.root);
 // tree1.delete(16);
 // console.log('%c after delete', 'color: #ff0000');
-// prettyPrint(tree1.root);
+prettyPrint(tree1.root);
 
 console.table(tree1.showTreeAsArray());
 
