@@ -183,7 +183,8 @@ describe('Tree class', () => {
     tree1.buildTree([1, 2, 3, 4]);
     it('should not have node.left or node.right value occur more than once', () => {
       // nothing on the 'left' column can be on the 'right' column, vice versa
-      // besides NULL, there should not be duplicate values in LEFT column
+      // besides NULL
+    // there should not be duplicate values in LEFT column
       // besides NULL, there should not be duplicate values in RIGHT column
       const arrayOfLeftRightReferences = [];
       tree1.showTreeAsArray().forEach((nodeItemObject) => {
