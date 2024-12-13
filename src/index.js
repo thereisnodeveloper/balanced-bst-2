@@ -275,6 +275,8 @@ export class Tree {
     }, 0);
   }
 
+  //the number of edges in the path from a given node to the tree’s root node.
+  depth(){}
 
 }
 
