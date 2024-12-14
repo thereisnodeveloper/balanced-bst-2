@@ -149,8 +149,7 @@ export class Tree {
       const deleteTarget = node[direction];
       // deletion target has 2 children
       if (deleteTarget.left && deleteTarget.right) {
-        const { node: successor, nodeParent: successorParent } =
-          this.findInOrderSuccessor(deleteTarget);
+        const { node: successor, nodeParent: successorParent } = this.findInOrderSuccessor(deleteTarget);
         // set data of deleteTarget's parent's reference to its successor's data
         node[direction].data = successor.data;
         // replace reference to the successor with its child (grandpa is now father)
@@ -238,7 +237,7 @@ export class Tree {
    * @returns an array containing the current count, and maxHeight [count, maxHeight]
    */
   heightWay4TraversalBased(node = this.root, count = 1, maxHeight = 0) {
-    if (!node) return [0, 0]; //return 0 for height if node doesn't exist
+    if (!node) return [0, 0]; // return 0 for height if node doesn't exist
     if (count > maxHeight) maxHeight = count;
 
     if (node.left) {
@@ -285,12 +284,12 @@ export class Tree {
     // reset count OR -1 from count every time function is returned
     if (!currentNode.right && !currentNode.left) return --count;
 
-    if (targetNode.data < currentNode.data)
-      return this.depth(targetNode, currentNode.left, ++count);
-    else if (targetNode.data > currentNode.data) {
+    if (targetNode.data < currentNode.data) return this.depth(targetNode, currentNode.left, ++count);
+    if (targetNode.data > currentNode.data) {
       return this.depth(targetNode, currentNode.right, ++count);
     }
   }
+
   isBalanced() {
     const balanceArray = [];
     const checkBalanceForOneNode = (node) => {
@@ -300,10 +299,10 @@ export class Tree {
       // console.log('leftHeight:', leftHeight);
       const rightHeight = node.right ? this.height(node.right)[1] : 0;
       // console.log('rightHeight:', rightHeight);
-      balanceArray.push (Math.abs(leftHeight - rightHeight) <= 1);
+      balanceArray.push(Math.abs(leftHeight - rightHeight) <= 1);
     };
-    this.inOrder(checkBalanceForOneNode)
-    return balanceArray.every((item)=>item === true);
+    this.inOrder(checkBalanceForOneNode);
+    return balanceArray.every((item) => item === true);
   }
 }
 

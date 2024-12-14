@@ -55,10 +55,10 @@ describe('Tree class', () => {
         tree2.root.right.right.right = new NodeBst(5);
         expect(tree2.isBalanced()).toBe(false)
     });
-    // it('returns true for [0-7]',()=>{
-    //   tree1.buildTree([0, 1, 2, 3, 4, 5, 6, 7]);
-      
-    // })
+    it('returns true for [0-7]',()=>{
+      tree1.buildTree([0, 1, 2, 3, 4, 5, 6, 7]);
+      expect( tree1.isBalanced()).toBe(true)
+    })
   });
 
   describe('depth', () => {
