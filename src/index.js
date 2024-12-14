@@ -279,22 +279,29 @@ export class Tree {
   depth(targetNode, currentNode = this.root, count = 0) {
     // console.log('count:', count)
     // console.log('currentNode:', currentNode)
-    if(!targetNode) throw new Error ('invalid target')
+    if (!targetNode) throw new Error('invalid target');
     // BASE CASE: reached target
     if (currentNode.data === targetNode.data) return count;
 
     // BASE CASE: reached leaf
     // reset count OR -1 from count every time function is returned
     if (!currentNode.right && !currentNode.left) return --count;
-    
+
     if (targetNode.data < currentNode.data)
       return this.depth(targetNode, currentNode.left, ++count);
     else if (targetNode.data > currentNode.data) {
       return this.depth(targetNode, currentNode.right, ++count);
     }
   }
-  isBalanced(node = this.root){
-    return true
+  isBalanced(node = this.root) {
+    //test on just 1 node first, then use traversal
+    
+    const leftHeight = this.height(node.left)[1]
+    console.log('leftHeight:', leftHeight)
+    const rightHeight = this.height(node.right)[1]
+console.log('rightHeight:', rightHeight)
+    
+    return Math.abs( leftHeight - rightHeight) <= 1;
   }
 }
 
@@ -335,3 +342,4 @@ console.table(tree1.showTreeAsArray());
 
 // console.log('final count:  ', tree1.heightWay4TraversalBased()[1])
 // console.log(tree1.height(tree1.root.right)[1]);
+console.log('tree1.isBalanced():', tree1.isBalanced())
