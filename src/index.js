@@ -238,16 +238,15 @@ export class Tree {
    * @returns an array containing the current count, and maxHeight [count, maxHeight]
    */
   heightWay4TraversalBased(node = this.root, count = 1, maxHeight = 0) {
-    // whenever visiting LEFT or RIGHT, ++count
-    // whenever finishing the entire DLR function, --count (returning and going back
-    // up the function  )
+    if(!node) return [0,0] //return 0 for height if node doesn't exist
     if (count > maxHeight) maxHeight = count;
 
-    if (node.left) {
+    if (node.left) { 
       [count, maxHeight] = this.heightWay4TraversalBased(node.left, ++count, maxHeight);
     }
     if (node.right) {
       [count, maxHeight] = this.heightWay4TraversalBased(node.right, ++count, maxHeight);
+      
     }
     return [--count, maxHeight];
   }
@@ -343,3 +342,9 @@ console.table(tree1.showTreeAsArray());
 // console.log('final count:  ', tree1.heightWay4TraversalBased()[1])
 // console.log(tree1.height(tree1.root.right)[1]);
 console.log('tree1.isBalanced():', tree1.isBalanced())
+
+// const tree2 = new Tree()
+// tree2.root = new NodeBst(0)
+// tree2.root.right = new NodeBst(1)
+// tree2.root.right.right = new NodeBst(2)
+      // prettyPrint(tree2.root)

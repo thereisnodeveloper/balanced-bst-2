@@ -8,10 +8,18 @@ describe('Tree class', () => {
     it('exists', () => {
       expect(tree1.isBalanced).toBeDefined();
     });
-    it('returns true when root node is fed to [0, 1, 2, 3, 4, 5, 6, 7]',()=>{
+    it('returns true when root node is fed to [0, 1, 2, 3, 4, 5, 6, 7]', () => {
       tree1.buildTree([0, 1, 2, 3, 4, 5, 6, 7]);
-      expect(tree1.isBalanced()).toBe(true)
-    })
+      expect(tree1.isBalanced()).toBe(true);
+    });
+    it('returns false for a small unbalanced tree', () => {
+      const tree2 = new Tree();
+      tree2.root = new NodeBst(0);
+      tree2.root.right = new NodeBst(1);
+      tree2.root.right.right = new NodeBst(2);
+
+      expect(tree2.isBalanced()).toBe(false);
+    });
   });
 
   describe('depth', () => {
