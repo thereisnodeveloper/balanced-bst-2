@@ -40,6 +40,9 @@ describe('Tree class', () => {
     it('exists',()=>{
       expect(tree1.rebalance).toBeDefined()
     })
+    it('throws error if tree is already balanced',()=>{
+      expect(tree1.rebalance).toThrow()
+    })
   })
   describe('isBalanced- check if tree is balanced', () => {
     

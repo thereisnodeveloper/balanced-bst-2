@@ -304,7 +304,10 @@ export class Tree {
     return balanceArray.every((item) => item === true);
   }
   rebalance(){
-    
+    if(this.isBalanced()) throw new Error ('already balanced')
+
+
+      
   }
 }
 
