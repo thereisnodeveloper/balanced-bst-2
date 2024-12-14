@@ -14,7 +14,11 @@ describe('Tree class', () => {
       expect(tree1.depth(tree1.root.left)).toBe(1);
       expect(tree1.depth(tree1.root.left.right)).toBe(2);
     });
-    // it('throws error if targetNode does not exist')
+    it('throws error if targetNode does not exist',()=>{
+      tree1.buildTree([0, 1, 2, 3, 4, 5, 6, 7]);
+      expect(()=>tree1.depth(tree1.dontExist)).toThrow()
+      
+    })
     // it('returns 1 if targetNode is root')
 
 
