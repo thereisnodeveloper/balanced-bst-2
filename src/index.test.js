@@ -1,10 +1,48 @@
 import { NodeBst, Tree } from './index.js';
 
+
+// Unbalanced tree 1: Right-heavy
+const rightHeavyTree = new Tree();
+rightHeavyTree.root = new NodeBst(5);
+rightHeavyTree.root.right = new NodeBst(8);
+rightHeavyTree.root.right.left = new NodeBst(7);
+rightHeavyTree.root.right.right = new NodeBst(10);
+rightHeavyTree.root.right.right.right = new NodeBst(12);
+
+// Unbalanced tree 2: Left-heavy
+const leftHeavyTree = new Tree();
+leftHeavyTree.root = new NodeBst(10);
+leftHeavyTree.root.left = new NodeBst(5);
+leftHeavyTree.root.left.left = new NodeBst(3);
+leftHeavyTree.root.left.left.left = new NodeBst(1);
+leftHeavyTree.root.left.right = new NodeBst(7);
+
+
+// Unbalanced tree 3: Zigzag
+const zigzagTree = new Tree();
+zigzagTree.root = new NodeBst(8);
+zigzagTree.root.left = new NodeBst(3);
+zigzagTree.root.left.right = new NodeBst(6);
+zigzagTree.root.left.right.left = new NodeBst(4);
+zigzagTree.root.left.right.right = new NodeBst(7);
+zigzagTree.root.right = new NodeBst(10);
+zigzagTree.root.right.right = new NodeBst(14);
+zigzagTree.root.right.right.left = new NodeBst(13);
+
+
+
 describe('Tree class', () => {
+  const sampleTreesArray = [leftHeavyTree,rightHeavyTree,zigzagTree]
   const tree1 = new Tree();
   let testAnswer;
 
+  // describe('rebalance() - rebalances tree if unbalanced')
   describe('isBalanced- check if tree is balanced', () => {
+    
+    test.each(sampleTreesArray)('tree 1 of 3 unbalanced trees',(treeItem)=>{
+      expect( treeItem.isBalanced()).toBe(false)
+    })
+
     it('exists', () => {
       expect(tree1.isBalanced).toBeDefined();
     });

@@ -149,7 +149,8 @@ export class Tree {
       const deleteTarget = node[direction];
       // deletion target has 2 children
       if (deleteTarget.left && deleteTarget.right) {
-        const { node: successor, nodeParent: successorParent } = this.findInOrderSuccessor(deleteTarget);
+        const { node: successor, nodeParent: successorParent } =
+          this.findInOrderSuccessor(deleteTarget);
         // set data of deleteTarget's parent's reference to its successor's data
         node[direction].data = successor.data;
         // replace reference to the successor with its child (grandpa is now father)
@@ -284,7 +285,8 @@ export class Tree {
     // reset count OR -1 from count every time function is returned
     if (!currentNode.right && !currentNode.left) return --count;
 
-    if (targetNode.data < currentNode.data) return this.depth(targetNode, currentNode.left, ++count);
+    if (targetNode.data < currentNode.data)
+      return this.depth(targetNode, currentNode.left, ++count);
     if (targetNode.data > currentNode.data) {
       return this.depth(targetNode, currentNode.right, ++count);
     }
@@ -338,9 +340,6 @@ console.table(tree1.showTreeAsArray());
 // OPTION3: forEach, some - nest loop, bad O(n)
 // DECISION: go with OPT1; cant find alternatives no internet
 
-// console.log('final count:  ', tree1.heightWay4TraversalBased()[1])
-// console.log(tree1.height(tree1.root.right)[1]);
-
 const tree2 = new Tree();
 tree2.root = new NodeBst(2);
 tree2.root.left = new NodeBst(1);
@@ -348,3 +347,42 @@ tree2.root.right = new NodeBst(3);
 tree2.root.right.right = new NodeBst(4);
 tree2.root.right.right.right = new NodeBst(5);
 console.log(tree2.isBalanced());
+
+
+// ... existing code ...
+
+// Unbalanced tree 1: Right-heavy
+const rightHeavyTree = new Tree();
+rightHeavyTree.root = new NodeBst(5);
+rightHeavyTree.root.right = new NodeBst(8);
+rightHeavyTree.root.right.left = new NodeBst(7);
+rightHeavyTree.root.right.right = new NodeBst(10);
+rightHeavyTree.root.right.right.right = new NodeBst(12);
+// console.log('right-heavy tree:')
+
+// prettyPrint(rightHeavyTree.root)
+
+// Unbalanced tree 2: Left-heavy
+const leftHeavyTree = new Tree();
+leftHeavyTree.root = new NodeBst(10);
+leftHeavyTree.root.left = new NodeBst(5);
+leftHeavyTree.root.left.left = new NodeBst(3);
+leftHeavyTree.root.left.left.left = new NodeBst(1);
+leftHeavyTree.root.left.right = new NodeBst(7);
+// console.log('left-heavy tree:')
+
+// prettyPrint(leftHeavyTree.root)
+
+
+// Unbalanced tree 3: Zigzag
+const zigzagTree = new Tree();
+zigzagTree.root = new NodeBst(8);
+zigzagTree.root.left = new NodeBst(3);
+zigzagTree.root.left.right = new NodeBst(6);
+zigzagTree.root.left.right.left = new NodeBst(4);
+zigzagTree.root.left.right.right = new NodeBst(7);
+zigzagTree.root.right = new NodeBst(10);
+zigzagTree.root.right.right = new NodeBst(14);
+zigzagTree.root.right.right.left = new NodeBst(13);
+// console.log('zigzag tree:')
+// prettyPrint(zigzagTree.root)
