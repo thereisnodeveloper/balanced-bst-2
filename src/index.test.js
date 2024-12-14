@@ -7,22 +7,18 @@ describe('Tree class', () => {
     it('exists', () => {
       expect(tree1.depth).toBeDefined();
     });
-    it('returns depth of 1 when targetNode is .... ', () => {
+    it('returns depth of x when targetNode is .... ', () => {
       tree1.buildTree([0, 1, 2, 3, 4, 5, 6, 7]);
-      
+
       expect(tree1.depth(tree1.root.right)).toBe(1);
       expect(tree1.depth(tree1.root.left)).toBe(1);
       expect(tree1.depth(tree1.root.left.right)).toBe(2);
+      expect(tree1.depth(tree1.root)).toBe(0);
     });
-    it('throws error if targetNode does not exist',()=>{
+    it('throws error if targetNode does not exist', () => {
       tree1.buildTree([0, 1, 2, 3, 4, 5, 6, 7]);
-      expect(()=>tree1.depth(tree1.dontExist)).toThrow()
-      
-    })
-    // it('returns 1 if targetNode is root')
-
-
-    //TODO: test case where given node is NOT root
+      expect(() => tree1.depth(tree1.dontExist)).toThrow();
+    });
   });
 
   describe('approach1 - path based ', () => {
@@ -188,7 +184,7 @@ describe('Tree class', () => {
     it('should not have node.left or node.right value occur more than once', () => {
       // nothing on the 'left' column can be on the 'right' column, vice versa
       // besides NULL
-    // there should not be duplicate values in LEFT column
+      // there should not be duplicate values in LEFT column
       // besides NULL, there should not be duplicate values in RIGHT column
       const arrayOfLeftRightReferences = [];
       tree1.showTreeAsArray().forEach((nodeItemObject) => {
