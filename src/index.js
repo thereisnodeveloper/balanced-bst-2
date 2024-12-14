@@ -291,23 +291,22 @@ export class Tree {
       return this.depth(targetNode, currentNode.right, ++count);
     }
   }
-  isBalanced(node = this.root) {
-    //test on just 1 node first, then use traversal
-
-    // if(!node) throw new Error ('invalid error')
-
-    const balanceArray = []
-    const checkBalanceForOneNode = (node = this.root) => {
-      const leftHeight = this.height(node.left)[1];
-      console.log('leftHeight:', leftHeight);
-      const rightHeight = this.height(node.right)[1];
-      console.log('rightHeight:', rightHeight);
-      return Math.abs(leftHeight - rightHeight) <= 1;
+  isBalanced() {
+    const balanceArray = [];
+    const checkBalanceForOneNode = (node) => {
+      if (!node) throw new Error('invalid error');
+      // console.log('node:', node);
+      const leftHeight = node.left ? this.height(node.left)[1] : 0;
+      // console.log('leftHeight:', leftHeight);
+      const rightHeight = node.right ? this.height(node.right)[1] : 0;
+      // console.log('rightHeight:', rightHeight);
+      // return Math.abs(leftHeight - rightHeight) <= 1;
+      balanceArray.push (Math.abs(leftHeight - rightHeight) <= 1);
     };
-    this.showTreeAsArray().forEach(item=>balanceArray.push(checkBalanceForOneNode()) )
-return balanceArray
-    return [true, true, true, true, true, true, true, true];
     
+    this.inOrder(checkBalanceForOneNode)
+    // console.log('convertedToArray:', convertedToArray);
+    return balanceArray;
   }
 }
 
@@ -348,10 +347,11 @@ console.table(tree1.showTreeAsArray());
 
 // console.log('final count:  ', tree1.heightWay4TraversalBased()[1])
 // console.log(tree1.height(tree1.root.right)[1]);
-console.log('tree1.isBalanced():', tree1.isBalanced());
 
-// const tree2 = new Tree()
-// tree2.root = new NodeBst(0)
-// tree2.root.right = new NodeBst(1)
-// tree2.root.right.right = new NodeBst(2)
-// prettyPrint(tree2.root)
+const tree2 = new Tree();
+tree2.root = new NodeBst(2);
+tree2.root.left = new NodeBst(1);
+tree2.root.right = new NodeBst(3);
+tree2.root.right.right = new NodeBst(4);
+tree2.root.right.right.right = new NodeBst(5);
+console.log(tree2.isBalanced());
