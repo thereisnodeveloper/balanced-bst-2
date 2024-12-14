@@ -8,6 +8,10 @@ describe('Tree class', () => {
     it('exists', () => {
       expect(tree1.isBalanced).toBeDefined();
     });
+    it('returns true when root node is fed to [0, 1, 2, 3, 4, 5, 6, 7]',()=>{
+      tree1.buildTree([0, 1, 2, 3, 4, 5, 6, 7]);
+      expect(tree1.isBalanced()).toBe(true)
+    })
   });
 
   describe('depth', () => {
