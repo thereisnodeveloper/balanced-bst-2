@@ -36,12 +36,16 @@ describe('Tree class', () => {
   const tree1 = new Tree();
   let testAnswer;
 
+
   describe('rebalance() - rebalances tree if unbalanced',()=>{
     it('exists',()=>{
       expect(tree1.rebalance).toBeDefined()
     })
     it('throws error if tree is already balanced',()=>{
       expect(tree1.rebalance).toThrow()
+    })
+    it('takes an unbalanced tree and flattens to array',()=>{
+      expect(rightHeavyTree.rebalance()).toStrictEqual([5,7,8,10,12])
     })
   })
   describe('isBalanced- check if tree is balanced', () => {
@@ -51,7 +55,7 @@ describe('Tree class', () => {
     })
 
     it('exists', () => {
-      expect(tree1.isBalanced).toBeDefined();
+      expect(tree1.isBalanced).toBeDefined()
     });
     // it('returns true when root node is fed to [0, 1, 2, 3, 4, 5, 6, 7]', () => {
     //   tree1.buildTree([0, 1, 2, 3, 4, 5, 6, 7]);

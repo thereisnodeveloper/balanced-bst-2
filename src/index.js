@@ -303,11 +303,12 @@ export class Tree {
     this.inOrder(checkBalanceForOneNode);
     return balanceArray.every((item) => item === true);
   }
-  rebalance(){
-    if(this.isBalanced()) throw new Error ('already balanced')
+  rebalance() {
+    if (this.isBalanced()) throw new Error('already balanced');
 
-
-      
+    const arrayOfNodes = [];
+    this.inOrder((node) => arrayOfNodes.push(node.data));
+    return arrayOfNodes;
   }
 }
 
@@ -354,7 +355,6 @@ tree2.root.right.right = new NodeBst(4);
 tree2.root.right.right.right = new NodeBst(5);
 console.log(tree2.isBalanced());
 
-
 // ... existing code ...
 
 // Unbalanced tree 1: Right-heavy
@@ -378,7 +378,6 @@ leftHeavyTree.root.left.right = new NodeBst(7);
 // console.log('left-heavy tree:')
 
 // prettyPrint(leftHeavyTree.root)
-
 
 // Unbalanced tree 3: Zigzag
 const zigzagTree = new Tree();
