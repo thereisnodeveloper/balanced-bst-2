@@ -44,8 +44,12 @@ describe('Tree class', () => {
     it('throws error if tree is already balanced',()=>{
       expect(tree1.rebalance).toThrow()
     })
-    it('takes an unbalanced tree and flattens to array',()=>{
-      expect(rightHeavyTree.rebalance()).toStrictEqual([5,7,8,10,12])
+    // it('takes an unbalanced tree and flattens to array',()=>{
+    //   expect(rightHeavyTree.rebalance()).toStrictEqual([5,7,8,10,12])
+    // })
+    it('takes an unbalanced tree and balances tree',()=>{
+      rightHeavyTree.rebalance()
+      expect(rightHeavyTree.isBalanced()).toBe(true)
     })
   })
   describe('isBalanced- check if tree is balanced', () => {

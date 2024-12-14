@@ -149,8 +149,7 @@ export class Tree {
       const deleteTarget = node[direction];
       // deletion target has 2 children
       if (deleteTarget.left && deleteTarget.right) {
-        const { node: successor, nodeParent: successorParent } =
-          this.findInOrderSuccessor(deleteTarget);
+        const { node: successor, nodeParent: successorParent } = this.findInOrderSuccessor(deleteTarget);
         // set data of deleteTarget's parent's reference to its successor's data
         node[direction].data = successor.data;
         // replace reference to the successor with its child (grandpa is now father)
@@ -285,8 +284,7 @@ export class Tree {
     // reset count OR -1 from count every time function is returned
     if (!currentNode.right && !currentNode.left) return --count;
 
-    if (targetNode.data < currentNode.data)
-      return this.depth(targetNode, currentNode.left, ++count);
+    if (targetNode.data < currentNode.data) return this.depth(targetNode, currentNode.left, ++count);
     if (targetNode.data > currentNode.data) {
       return this.depth(targetNode, currentNode.right, ++count);
     }
@@ -303,12 +301,14 @@ export class Tree {
     this.inOrder(checkBalanceForOneNode);
     return balanceArray.every((item) => item === true);
   }
+
   rebalance() {
     if (this.isBalanced()) throw new Error('already balanced');
 
     const arrayOfNodes = [];
     this.inOrder((node) => arrayOfNodes.push(node.data));
-    return arrayOfNodes;
+    this.buildTree(arrayOfNodes)
+    
   }
 }
 
