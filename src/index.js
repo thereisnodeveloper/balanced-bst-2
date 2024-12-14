@@ -294,11 +294,8 @@ export class Tree {
     const balanceArray = [];
     const checkBalanceForOneNode = (node) => {
       if (!node) throw new Error('invalid error');
-      // console.log('node:', node);
       const leftHeight = node.left ? this.height(node.left)[1] : 0;
-      // console.log('leftHeight:', leftHeight);
       const rightHeight = node.right ? this.height(node.right)[1] : 0;
-      // console.log('rightHeight:', rightHeight);
       balanceArray.push(Math.abs(leftHeight - rightHeight) <= 1);
     };
     this.inOrder(checkBalanceForOneNode);
