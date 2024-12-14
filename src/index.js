@@ -277,8 +277,8 @@ export class Tree {
 
   // the number of edges in the path from a given node to the tree’s root node.
   depth(targetNode, currentNode = this.root, count = 0) {
-    console.log('count:', count)
-    console.log('currentNode:', currentNode)
+    // console.log('count:', count)
+    // console.log('currentNode:', currentNode)
     if(!targetNode) throw new Error ('invalid target')
     // BASE CASE: reached target
     if (currentNode.data === targetNode.data) return count;
@@ -293,8 +293,8 @@ export class Tree {
       return this.depth(targetNode, currentNode.right, ++count);
     }
   }
-  isBalanced(){
-    return null
+  isBalanced(node = this.root){
+    return true
   }
 }
 
