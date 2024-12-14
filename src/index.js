@@ -294,13 +294,18 @@ export class Tree {
   }
   isBalanced(node = this.root) {
     //test on just 1 node first, then use traversal
-    
+
+    // if(!node) throw new Error ('invalid error')
+
+    // const checkBalanceForOneNode = (node = this.root)=>{
     const leftHeight = this.height(node.left)[1]
     console.log('leftHeight:', leftHeight)
     const rightHeight = this.height(node.right)[1]
 console.log('rightHeight:', rightHeight)
-    
+
+return [true,true,true,true,true,true,true,true]
     return Math.abs( leftHeight - rightHeight) <= 1;
+  // }
   }
 }
 
