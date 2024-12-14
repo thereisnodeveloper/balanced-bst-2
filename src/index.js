@@ -149,7 +149,8 @@ export class Tree {
       const deleteTarget = node[direction];
       // deletion target has 2 children
       if (deleteTarget.left && deleteTarget.right) {
-        const { node: successor, nodeParent: successorParent } = this.findInOrderSuccessor(deleteTarget);
+        const { node: successor, nodeParent: successorParent } =
+          this.findInOrderSuccessor(deleteTarget);
         // set data of deleteTarget's parent's reference to its successor's data
         node[direction].data = successor.data;
         // replace reference to the successor with its child (grandpa is now father)
@@ -284,7 +285,8 @@ export class Tree {
     // reset count OR -1 from count every time function is returned
     if (!currentNode.right && !currentNode.left) return --count;
 
-    if (targetNode.data < currentNode.data) return this.depth(targetNode, currentNode.left, ++count);
+    if (targetNode.data < currentNode.data)
+      return this.depth(targetNode, currentNode.left, ++count);
     if (targetNode.data > currentNode.data) {
       return this.depth(targetNode, currentNode.right, ++count);
     }
@@ -307,9 +309,50 @@ export class Tree {
 
     const arrayOfNodes = [];
     this.inOrder((node) => arrayOfNodes.push(node.data));
-    this.buildTree(arrayOfNodes)
-    
+    this.buildTree(arrayOfNodes);
   }
+}
+function treeDriver() {
+  //Create a binary search tree from an array of random numbers < 100. You can
+  //create a function that returns an array of random numbers every time you
+  //call it if you wish.
+  const treeArray = createRandomArray(100);
+  console.log('treeArray:', treeArray);
+  const testTree = new Tree();
+  testTree.buildTree(treeArray);
+  // Confirm that the tree is balanced by calling isBalanced.
+  console.log(testTree.isBalanced());
+  // prettyPrint(testTree.root);
+
+  // Print out all elements in level, pre, post, and in order.
+  //Generalized function that takes in a traversal method
+  function printInXorder(traversalFunction){
+    let arrayToPrint = [];
+    const makeArrayToPrint = (node) => {
+      arrayToPrint.push(node.data);
+    };
+    traversalFunction.call(testTree, makeArrayToPrint);
+    console.log(traversalFunction.name, arrayToPrint);
+    arrayToPrint = []
+  }
+  printInXorder(testTree.levelOrder)
+  printInXorder(testTree.preOrder)
+  printInXorder(testTree.inOrder)
+  printInXorder(testTree.postOrder)
+  
+
+  // Unbalance the tree by adding several numbers > 100.
+  // Confirm that the tree is unbalanced by calling isBalanced.
+  // Balance the tree by calling rebalance.
+  // Confirm that the tree is balanced by calling isBalanced.
+  // Print out all elements in level, pre, post, and in order.
+}
+function createRandomArray(numberOfItems) {
+  const array = [];
+  for (let i = 0; i < numberOfItems; i++) {
+    array.push(Math.floor(Math.random() * numberOfItems));
+  }
+  return array;
 }
 
 function prettyPrint(node, prefix = '', isLeft = true) {
@@ -391,3 +434,6 @@ zigzagTree.root.right.right = new NodeBst(14);
 zigzagTree.root.right.right.left = new NodeBst(13);
 // console.log('zigzag tree:')
 // prettyPrint(zigzagTree.root)
+
+// console.log(createRandom100());
+treeDriver();
