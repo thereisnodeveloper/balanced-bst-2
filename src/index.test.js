@@ -20,40 +20,45 @@ describe('Tree class', () => {
 
     //   expect(tree2.isBalanced()).toBe(false);
     // });
-    it('checks every node of a tree for its subtrees balance', () => {
-      tree1.buildTree([0, 1, 2, 3, 4, 5, 6, 7]);
-      expect(tree1.isBalanced()).toStrictEqual([true, true, true, true, true, true, true, true]);
-    });
+    // it('checks every node of a tree for its subtrees balance', () => {
+    //   tree1.buildTree([0, 1, 2, 3, 4, 5, 6, 7]);
+    //   expect(tree1.isBalanced()).toStrictEqual([true, true, true, true, true, true, true, true]);
+    // });
 
-    it('contains 1 false in the array for for a small unbalanced tree', () => {
-      const tree2 = new Tree();
-      tree2.root = new NodeBst(0);
-      tree2.root.right = new NodeBst(1);
-      tree2.root.right.right = new NodeBst(2);
+    // it('contains 1 false in the array for for a small unbalanced tree', () => {
+    //   const tree2 = new Tree();
+    //   tree2.root = new NodeBst(0);
+    //   tree2.root.right = new NodeBst(1);
+    //   tree2.root.right.right = new NodeBst(2);
 
-      expect(tree2.isBalanced()).toContain(false);
+    //   expect(tree2.isBalanced()).toContain(false);
+    // });
+    // it('returns 2 false for an unbalanced tree', () => {
+    //   const tree2 = new Tree();
+    //   tree2.root = new NodeBst(2);
+    //   tree2.root.left = new NodeBst(1);
+    //   tree2.root.right = new NodeBst(3);
+    //   tree2.root.right.right = new NodeBst(4);
+    //   tree2.root.right.right.right = new NodeBst(5);
+    //   expect(tree2.isBalanced().reduce((accumulator, currentItem) => {
+    //         if (!currentItem) accumulator++;
+    //         return accumulator;
+    //       }, 0)).toBe(2)
+    // });
+
+    it('immediate returns false as soon as 1 node is unbalanced', () => {
+        const tree2 = new Tree();
+        tree2.root = new NodeBst(2);
+        tree2.root.left = new NodeBst(1);
+        tree2.root.right = new NodeBst(3);
+        tree2.root.right.right = new NodeBst(4);
+        tree2.root.right.right.right = new NodeBst(5);
+        expect(tree2.isBalanced()).toBe(false)
     });
-    it('returns just 1 false for unbalanced tree', () => {
-      const tree2 = new Tree();
-      tree2.root = new NodeBst(2);
-      tree2.root.left = new NodeBst(1);
-      tree2.root.right = new NodeBst(3);
-      tree2.root.right.right = new NodeBst(4);
-      tree2.root.right.right.right = new NodeBst(5);
-      expect(tree2.isBalanced().reduce((accumulator, currentItem) => {
-            if (!currentItem) accumulator++;
-            return accumulator;
-          }, 0)).toBe(2)
+    // it('returns true for [0-7]',()=>{
+    //   tree1.buildTree([0, 1, 2, 3, 4, 5, 6, 7]);
       
-      // expect(
-      //   tree2.isBalanced().reduce((accumulator, currentItem) => {
-      //     if (!currentItem) accumulator++;
-      //     return accumulator;
-      //   }, 0)
-      // ).toBe(1);
-    });
-
-    // it('immediate returns false as soon as 1 node is unbalanced',()=>{
+    // })
   });
 
   describe('depth', () => {

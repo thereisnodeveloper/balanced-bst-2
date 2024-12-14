@@ -300,13 +300,10 @@ export class Tree {
       // console.log('leftHeight:', leftHeight);
       const rightHeight = node.right ? this.height(node.right)[1] : 0;
       // console.log('rightHeight:', rightHeight);
-      // return Math.abs(leftHeight - rightHeight) <= 1;
       balanceArray.push (Math.abs(leftHeight - rightHeight) <= 1);
     };
-    
     this.inOrder(checkBalanceForOneNode)
-    // console.log('convertedToArray:', convertedToArray);
-    return balanceArray;
+    return balanceArray.every((item)=>item === true);
   }
 }
 
