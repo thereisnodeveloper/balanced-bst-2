@@ -4,9 +4,11 @@ describe('Tree class', () => {
   const tree1 = new Tree();
   let testAnswer;
 
-  describe('isBalanced- check if tree is balanced',()=>{
-    expect(tree1.isBalanced).toBeDefined()
-  })
+  describe('isBalanced- check if tree is balanced', () => {
+    it('exists', () => {
+      expect(tree1.isBalanced).toBeDefined();
+    });
+  });
 
   describe('depth', () => {
     it('exists', () => {

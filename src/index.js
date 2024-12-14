@@ -293,6 +293,9 @@ export class Tree {
       return this.depth(targetNode, currentNode.right, ++count);
     }
   }
+  isBalanced(){
+    return null
+  }
 }
 
 function prettyPrint(node, prefix = '', isLeft = true) {
