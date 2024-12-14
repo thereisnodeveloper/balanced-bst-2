@@ -238,15 +238,14 @@ export class Tree {
    * @returns an array containing the current count, and maxHeight [count, maxHeight]
    */
   heightWay4TraversalBased(node = this.root, count = 1, maxHeight = 0) {
-    if(!node) return [0,0] //return 0 for height if node doesn't exist
+    if (!node) return [0, 0]; //return 0 for height if node doesn't exist
     if (count > maxHeight) maxHeight = count;
 
-    if (node.left) { 
+    if (node.left) {
       [count, maxHeight] = this.heightWay4TraversalBased(node.left, ++count, maxHeight);
     }
     if (node.right) {
       [count, maxHeight] = this.heightWay4TraversalBased(node.right, ++count, maxHeight);
-      
     }
     return [--count, maxHeight];
   }
@@ -297,15 +296,18 @@ export class Tree {
 
     // if(!node) throw new Error ('invalid error')
 
-    // const checkBalanceForOneNode = (node = this.root)=>{
-    const leftHeight = this.height(node.left)[1]
-    console.log('leftHeight:', leftHeight)
-    const rightHeight = this.height(node.right)[1]
-console.log('rightHeight:', rightHeight)
-
-return [true,true,true,true,true,true,true,true]
-    return Math.abs( leftHeight - rightHeight) <= 1;
-  // }
+    const balanceArray = []
+    const checkBalanceForOneNode = (node = this.root) => {
+      const leftHeight = this.height(node.left)[1];
+      console.log('leftHeight:', leftHeight);
+      const rightHeight = this.height(node.right)[1];
+      console.log('rightHeight:', rightHeight);
+      return Math.abs(leftHeight - rightHeight) <= 1;
+    };
+    this.showTreeAsArray().forEach(item=>balanceArray.push(checkBalanceForOneNode()) )
+return balanceArray
+    return [true, true, true, true, true, true, true, true];
+    
   }
 }
 
@@ -346,10 +348,10 @@ console.table(tree1.showTreeAsArray());
 
 // console.log('final count:  ', tree1.heightWay4TraversalBased()[1])
 // console.log(tree1.height(tree1.root.right)[1]);
-console.log('tree1.isBalanced():', tree1.isBalanced())
+console.log('tree1.isBalanced():', tree1.isBalanced());
 
 // const tree2 = new Tree()
 // tree2.root = new NodeBst(0)
 // tree2.root.right = new NodeBst(1)
 // tree2.root.right.right = new NodeBst(2)
-      // prettyPrint(tree2.root)
+// prettyPrint(tree2.root)
