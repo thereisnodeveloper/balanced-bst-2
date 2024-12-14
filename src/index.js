@@ -316,7 +316,8 @@ function treeDriver() {
   //Create a binary search tree from an array of random numbers < 100. You can
   //create a function that returns an array of random numbers every time you
   //call it if you wish.
-  const treeArray = createRandomArray(100);
+  const randomRange = 100;
+  const treeArray = createRandomArray(randomRange);
   console.log('treeArray:', treeArray);
   const testTree = new Tree();
   testTree.buildTree(treeArray);
@@ -326,26 +327,41 @@ function treeDriver() {
 
   // Print out all elements in level, pre, post, and in order.
   //Generalized function that takes in a traversal method
-  function printInXorder(traversalFunction){
+  function printInXorder(traversalFunction) {
     let arrayToPrint = [];
     const makeArrayToPrint = (node) => {
       arrayToPrint.push(node.data);
     };
     traversalFunction.call(testTree, makeArrayToPrint);
     console.log(traversalFunction.name, arrayToPrint);
-    arrayToPrint = []
+    arrayToPrint = [];
   }
-  printInXorder(testTree.levelOrder)
-  printInXorder(testTree.preOrder)
-  printInXorder(testTree.inOrder)
-  printInXorder(testTree.postOrder)
-  
+  printInXorder(testTree.levelOrder);
+  printInXorder(testTree.preOrder);
+  printInXorder(testTree.inOrder);
+  printInXorder(testTree.postOrder);
 
   // Unbalance the tree by adding several numbers > 100.
+  function unbalanceTree(numberOfItemsToAdd) {
+    for(let i = randomRange; i < randomRange + numberOfItemsToAdd; i++){
+      testTree.insert(i);
+    }
+  }
+  unbalanceTree(5)
+  printInXorder(testTree.inOrder)
   // Confirm that the tree is unbalanced by calling isBalanced.
+  console.log('is it balanced?? ', testTree.isBalanced())
   // Balance the tree by calling rebalance.
-  // Confirm that the tree is balanced by calling isBalanced.
+  testTree.rebalance()
+  console.log('rebalancing...')
+  console.log('is it balanced?? ' ,testTree.isBalanced())
+
   // Print out all elements in level, pre, post, and in order.
+  printInXorder(testTree.levelOrder);
+  printInXorder(testTree.preOrder);
+  printInXorder(testTree.inOrder);
+  printInXorder(testTree.postOrder);
+
 }
 function createRandomArray(numberOfItems) {
   const array = [];
