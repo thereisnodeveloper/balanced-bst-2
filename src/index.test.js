@@ -36,7 +36,11 @@ describe('Tree class', () => {
   const tree1 = new Tree();
   let testAnswer;
 
-  // describe('rebalance() - rebalances tree if unbalanced')
+  describe('rebalance() - rebalances tree if unbalanced',()=>{
+    it('exists',()=>{
+      expect(tree1.rebalance).toBeDefined()
+    })
+  })
   describe('isBalanced- check if tree is balanced', () => {
     
     test.each(sampleTreesArray)('tree 1 of 3 unbalanced trees',(treeItem)=>{

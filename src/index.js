@@ -303,6 +303,9 @@ export class Tree {
     this.inOrder(checkBalanceForOneNode);
     return balanceArray.every((item) => item === true);
   }
+  rebalance(){
+    
+  }
 }
 
 function prettyPrint(node, prefix = '', isLeft = true) {
